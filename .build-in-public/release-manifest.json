@@ -1,14 +1,27 @@
 {
   "schema": 1,
-  "status": "validated",
+  "status": "published-and-verified",
   "artifact": "pi-design-mode",
   "version": "0.1.0",
   "license": "MIT",
   "canonicalRepository": "https://github.com/liush2yuxjtu/pi-design-mode",
   "channels": {
-    "github": "prepared",
-    "npm": "prepared; authentication required",
-    "piGallery": "waiting for npm publication"
+    "github": {
+      "status": "published-and-verified",
+      "url": "https://github.com/liush2yuxjtu/pi-design-mode",
+      "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.1.0"
+    },
+    "npm": {
+      "status": "published-and-verified",
+      "url": "https://www.npmjs.com/package/pi-design-mode",
+      "version": "0.1.0",
+      "maintainer": "nyn5255"
+    },
+    "piGallery": {
+      "status": "indexed-and-verified",
+      "url": "https://pi.dev/packages/pi-design-mode",
+      "videoMetadata": "present"
+    }
   },
   "video": {
     "path": "assets/pi-design-mode-product-demo.mp4",
@@ -28,7 +41,8 @@
   "source": {
     "commit": "2c6b91f54802945414f01ecc628221474eea5de8",
     "tag": "v0.1.0",
-    "tagStatus": "planned; resolve after merge"
+    "tagStatus": "published",
+    "tagCommit": "7383a088089d1306f077ae6175bcf2498a24f528"
   },
   "validationProvenance": {
     "record": ".build-in-public/validation.json",
@@ -39,5 +53,19 @@
       "npm install --ignore-scripts --omit=dev <tarball>",
       "Pi loadExtensions smoke assertion"
     ]
+  },
+  "publishedAt": "2026-09-07T10:10:59Z",
+  "verification": {
+    "verifiedAt": "2026-09-07T10:14:09Z",
+    "installCommand": "pi install npm:pi-design-mode",
+    "loaderTools": [
+      "design_render",
+      "design_manage"
+    ],
+    "loaderCommands": [
+      "design",
+      "design-stop"
+    ],
+    "publicVideoSha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361"
   }
 }
