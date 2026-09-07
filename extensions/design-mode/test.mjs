@@ -340,12 +340,18 @@ test('取消恰在sips完成后、shutdown途中：不推进revision', async (t)
   await assert.rejects(h.call('design_render', { svg: legacy })); assert.deepEqual(h.current(), initial);
 });
 
-test('祖先符号链接写入拒绝；v1原始长brief完整保存；根样式变化保守标记全部区域', async (t) => {
+test('根目录符号链接拒绝、根目录以上符号链接允许；v1长brief与保守diff', async (t) => {
   const root = await directory(t), outside = await directory(t);
   await symlink(outside, join(root, 'linked'));
   const store = new DesignStore(join(root, 'linked'), exec);
   await assert.rejects(store.transaction({ state: newState(brief, true), sessionId: 'test', guard() {}, commit() {}, build: async () => {} }), /符号链接/);
   assert.deepEqual(await readdir(outside), []);
+  const aliasParent = await directory(t), physicalParent = await directory(t);
+  await symlink(physicalParent, join(aliasParent, 'alias'));
+  const throughAncestor = new DesignStore(join(aliasParent, 'alias', 'designs'), exec);
+  const state = newState(brief, true);
+  await throughAncestor.transaction({ state, sessionId: 'ancestor', guard() {}, commit() {}, build: async (pending) => { await writeFile(join(pending, 'proof.txt'), 'ok'); } });
+  assert.equal((await readdir(join(physicalParent, 'designs'))).length, 1);
   const long = '原始需求'.repeat(400);
   assert.equal(restoreState({ version: 1, active: true, brief: long, revision: 1 }).legacyBrief, long);
   const { regionDiff } = await jiti.import('./svg.ts');

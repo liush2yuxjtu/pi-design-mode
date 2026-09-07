@@ -33,7 +33,9 @@
     "extensions/design-mode/svg.ts",
     "extensions/design-mode/schema.ts",
     "extensions/design-mode/examples.json",
-    "extensions/design-mode/USAGE.md"
+    "extensions/design-mode/USAGE.md",
+    "assets/flow.png",
+    "SECURITY.md"
   ],
   "scripts": {
     "check": "cd extensions/design-mode && node check.mjs",

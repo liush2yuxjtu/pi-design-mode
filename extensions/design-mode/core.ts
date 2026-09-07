@@ -33,13 +33,26 @@ export function restoreState(value: unknown): DesignState {
 
 /** Every artifact is immutable. The session entry is the commit pointer; unfinished directories are never restored. */
 export class DesignStore {
+	private resolvedRoot?: Promise<string>;
 	constructor(readonly root: string, private readonly exec: Exec) {}
+
+	private rootPath(): Promise<string> {
+		return this.resolvedRoot ??= (async () => {
+			await mkdir(this.root, { recursive: true });
+			const info = await lstat(this.root);
+			if (!info.isDirectory() || info.isSymbolicLink()) throw new Error("产物根目录不能是符号链接");
+			return realpath(this.root);
+		})();
+	}
 
 	private async directory(path: string): Promise<void> {
 		const target = resolve(path);
-		// Check every ancestor, not just the final path: a symlinked designs/session directory must fail closed.
-		let current: string = sep;
-		for (const part of target.split(sep).filter(Boolean)) {
+		const lexicalRoot = resolve(this.root);
+		const remainder = relative(lexicalRoot, target);
+		if (remainder === ".." || remainder.startsWith(`..${sep}`) || isAbsolute(remainder)) throw new Error("产物路径越界");
+		// Ancestors above the configured root may be symlinks. The root and every descendant fail closed.
+		let current = await this.rootPath();
+		for (const part of remainder.split(sep).filter(Boolean)) {
 			current = join(current, part);
 			try { await mkdir(current); } catch (error) { if (!(error instanceof Error && "code" in error && error.code === "EEXIST")) throw error; }
 			const info = await lstat(current);
@@ -56,7 +69,8 @@ export class DesignStore {
 
 	async read(path: string, maxBytes: number): Promise<Buffer> {
 		const absolute = this.absolute(path);
-		if (await realpath(absolute) !== absolute) throw new Error("产物路径包含符号链接");
+		const expected = join(await this.rootPath(), path);
+		if (await realpath(absolute) !== expected) throw new Error("产物路径包含符号链接");
 		const file = await open(absolute, constants.O_RDONLY | constants.O_NOFOLLOW);
 		try {
 			const info = await file.stat();
