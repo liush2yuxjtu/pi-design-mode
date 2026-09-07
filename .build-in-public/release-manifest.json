@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "status": "prepared",
+  "status": "validated",
   "artifact": "pi-design-mode",
   "version": "0.1.0",
-  "license": "MIT (pending owner confirmation)",
+  "license": "MIT",
   "canonicalRepository": "https://github.com/liush2yuxjtu/pi-design-mode",
   "channels": {
     "github": "prepared",
@@ -18,9 +18,26 @@
   "preparedAt": "2026-09-07T08:23:04Z",
   "package": {
     "filename": "pi-design-mode-0.1.0.tgz",
-    "size": 23924,
-    "sha256": "a845afca16db709edbab172893d865a376eae8b2bdc1a244a799a993a3649778",
-    "integrity": "sha512-L1bVk7107tIHo0nJI7r5ye7qT2tUyXh0UaSinSyyll05LR+5axYmpKD160smYNST1EC9reccPpuKYJwXdLwFbA==",
-    "entries": 9
+    "size": 88986,
+    "sha256": "cea07399223d6fe93be7b177209faeb3229b7d0ed1073f92cebffa137dc199e0",
+    "integrity": "sha512-QfCi0VeXZ0xlv7Ime81B2Po0TEwAnFCdAEHJe7UtDY/4qPoeUZiXvo9XBKXXLXxftrPFggl6w/DKa7aJ690v8A==",
+    "entries": 11,
+    "sourceCommit": "2c6b91f54802945414f01ecc628221474eea5de8"
+  },
+  "validatedAt": "2026-09-07T08:55:20Z",
+  "source": {
+    "commit": "2c6b91f54802945414f01ecc628221474eea5de8",
+    "tag": "v0.1.0",
+    "tagStatus": "planned; resolve after merge"
+  },
+  "validationProvenance": {
+    "record": ".build-in-public/validation.json",
+    "commands": [
+      "npm run check",
+      "npm test",
+      "npm pack --ignore-scripts --json",
+      "npm install --ignore-scripts --omit=dev <tarball>",
+      "Pi loadExtensions smoke assertion"
+    ]
   }
 }

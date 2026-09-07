@@ -84,3 +84,5 @@ Evidence snapshots append to `.build-in-public/metrics.jsonl`; raw public respon
 ## Resume-safe reporting plan
 
 Report each channel as prepared, published, indexed, or verified install. Never treat downloads as unique users. Preserve exact version, commit, tag, tarball checksum, video checksum, timestamps, URLs, and command evidence.
+
+Release artifacts must bind package version and checksums to the validated source commit, planned release tag, UTC timestamps, canonical URLs, and exact validation commands with results. The release report records the final tag commit after merge; package bytes remain bound to the validated source commit above.
