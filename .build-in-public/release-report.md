@@ -48,4 +48,4 @@ Captured 2026-09-07T10:14:09Z. GitHub reported 0 stars and 0 forks for new repos
 
 ## Resume-safe claim
 
-Published and clean-install verified Pi Design Mode 0.1.0 through GitHub, npm, and Pi Package Gallery, with public MP4 preview and no telemetry. Adoption counts are not yet available.
+Published on GitHub and npm, indexed in Pi Package Gallery, and clean-install verified with `pi install npm:pi-design-mode`, with public MP4 preview and no telemetry. Adoption counts are not yet available.

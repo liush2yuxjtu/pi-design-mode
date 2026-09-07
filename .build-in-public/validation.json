@@ -31,6 +31,10 @@
     {
       "command": "release local-path and secret-pattern scan",
       "result": "passed"
+    },
+    {
+      "command": "pi install npm:pi-design-mode",
+      "result": "passed in clean temporary HOME; public npm package installed; 0 vulnerabilities; loader exposed design_render/design_manage and /design,/design-stop"
     }
   ],
   "package": {

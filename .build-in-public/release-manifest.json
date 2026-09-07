@@ -49,9 +49,12 @@
     "commands": [
       "npm run check",
       "npm test",
-      "npm pack --ignore-scripts --json",
-      "npm install --ignore-scripts --omit=dev <tarball>",
-      "Pi loadExtensions smoke assertion"
+      "npm pack --dry-run --ignore-scripts --json",
+      "npm install --ignore-scripts --omit=dev <pi-design-mode-0.1.0.tgz>",
+      "Pi loadExtensions smoke assertion",
+      "GitHub GET private-vulnerability-reporting",
+      "release local-path and secret-pattern scan",
+      "pi install npm:pi-design-mode"
     ]
   },
   "publishedAt": "2026-09-07T10:10:59Z",
