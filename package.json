@@ -1,0 +1,61 @@
+{
+  "name": "pi-design-mode",
+  "version": "0.1.0",
+  "description": "Brief-first SVG design exploration, revision, region protection, critique, and static multi-screen flows for Pi.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "design",
+    "svg",
+    "prototype",
+    "wireframe"
+  ],
+  "author": "liush2yuxjtu",
+  "license": "MIT",
+  "homepage": "https://github.com/liush2yuxjtu/pi-design-mode#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liush2yuxjtu/pi-design-mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liush2yuxjtu/pi-design-mode/issues"
+  },
+  "type": "module",
+  "os": [
+    "darwin"
+  ],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "files": [
+    "extensions/design-mode/index.ts",
+    "extensions/design-mode/core.ts",
+    "extensions/design-mode/svg.ts",
+    "extensions/design-mode/schema.ts",
+    "extensions/design-mode/examples.json",
+    "extensions/design-mode/USAGE.md",
+    "assets/flow.png",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "check": "cd extensions/design-mode && node check.mjs",
+    "test": "cd extensions/design-mode && node --test test.mjs",
+    "prepack": "npm run check && npm test"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.85.1",
+    "typescript": "^5.9.2"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions/design-mode/index.ts"
+    ],
+    "video": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/pi-design-mode-product-demo.mp4",
+    "image": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/flow.png"
+  }
+}

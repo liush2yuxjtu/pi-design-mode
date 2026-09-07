@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-09-07T08:55:20Z",
+  "package_version": "0.1.0",
+  "source_commit": "2c6b91f54802945414f01ecc628221474eea5de8",
+  "source_tag": "v0.1.0 (planned; resolved after merge)",
+  "commands": [
+    {
+      "command": "npm run check",
+      "result": "passed"
+    },
+    {
+      "command": "npm test",
+      "result": "16/16 passed"
+    },
+    {
+      "command": "npm pack --dry-run --ignore-scripts --json",
+      "result": "11 entries; assets/flow.png and SECURITY.md present; video excluded"
+    },
+    {
+      "command": "npm install --ignore-scripts --omit=dev <pi-design-mode-0.1.0.tgz>",
+      "result": "passed; 0 vulnerabilities"
+    },
+    {
+      "command": "Pi loadExtensions smoke assertion",
+      "result": "tools design_render/design_manage; commands design/design-stop"
+    },
+    {
+      "command": "GitHub GET private-vulnerability-reporting",
+      "result": "enabled=true"
+    },
+    {
+      "command": "release local-path and secret-pattern scan",
+      "result": "passed"
+    }
+  ],
+  "package": {
+    "sha256": "cea07399223d6fe93be7b177209faeb3229b7d0ed1073f92cebffa137dc199e0",
+    "integrity": "sha512-QfCi0VeXZ0xlv7Ime81B2Po0TEwAnFCdAEHJe7UtDY/4qPoeUZiXvo9XBKXXLXxftrPFggl6w/DKa7aJ690v8A==",
+    "size": 88986,
+    "entries": 11
+  },
+  "video_sha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361"
+}
