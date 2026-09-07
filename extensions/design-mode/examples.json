@@ -1,0 +1,82 @@
+{
+  "说明": "真实调用顺序。先在 Pi 执行 /design 异常处理台，再依次发送以下工具调用。protect 会显示用户确认。flow 嵌入实际已保存屏幕，不是标签占位。",
+  "calls": [
+    {
+      "tool": "design_manage",
+      "input": {
+        "action": "brief",
+        "brief": { "user": "值班运营", "scenario": "晨会前处理异常订单", "goal": "先发现异常，再进入处理详情", "must": ["异常数量", "一个主操作"], "mustNot": ["外部资源", "真实点击"], "direction": "清晰、紧凑，重点突出" }
+      }
+    },
+    {
+      "tool": "design_render",
+      "input": {
+        "note": "两种信息层级，等用户选方向",
+        "directions": [
+          {
+            "id": "overview", "label": "方向 A：异常概览",
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"420\" viewBox=\"0 0 640 420\" font-family=\"Arial\"><svg id=\"header\" x=\"0\" y=\"0\" width=\"640\" height=\"100\" viewBox=\"0 0 640 100\" overflow=\"hidden\"><rect width=\"640\" height=\"100\" fill=\"#172640\"/><text x=\"32\" y=\"60\" font-size=\"28\" fill=\"#ffffff\">异常处理台</text></svg><svg id=\"body\" x=\"0\" y=\"100\" width=\"640\" height=\"320\" viewBox=\"0 0 640 320\" overflow=\"hidden\"><rect width=\"640\" height=\"320\" fill=\"#f3f6fa\"/><text x=\"32\" y=\"64\" font-size=\"20\">待处理异常</text><text x=\"32\" y=\"136\" font-size=\"52\" fill=\"#172640\">12</text><rect x=\"32\" y=\"202\" width=\"210\" height=\"56\" rx=\"12\" fill=\"#315be8\"/><text x=\"56\" y=\"238\" font-size=\"20\" fill=\"#ffffff\">查看异常</text></svg></svg>"
+          },
+          {
+            "id": "focus", "label": "方向 B：操作优先",
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"420\" viewBox=\"0 0 640 420\" font-family=\"Arial\"><svg id=\"header\" x=\"0\" y=\"0\" width=\"640\" height=\"100\" viewBox=\"0 0 640 100\" overflow=\"hidden\"><rect width=\"640\" height=\"100\" fill=\"#e7efff\"/><text x=\"32\" y=\"60\" font-size=\"28\" fill=\"#172640\">先处理最紧急的异常</text></svg><svg id=\"body\" x=\"0\" y=\"100\" width=\"640\" height=\"320\" viewBox=\"0 0 640 320\" overflow=\"hidden\"><rect width=\"640\" height=\"320\" fill=\"#ffffff\"/><text x=\"32\" y=\"64\" font-size=\"24\">3 项紧急 · 9 项普通</text><rect x=\"32\" y=\"112\" width=\"300\" height=\"64\" rx=\"12\" fill=\"#315be8\"/><text x=\"58\" y=\"153\" font-size=\"22\" fill=\"#ffffff\">开始处理紧急异常</text></svg></svg>"
+          }
+        ]
+      }
+    },
+    { "tool": "design_manage", "input": { "action": "select", "artifact": "overview" } },
+    { "tool": "design_manage", "input": { "action": "protect", "regions": ["header"], "status": "locked" } },
+    {
+      "tool": "design_render",
+      "input": {
+        "note": "只改 body：主操作更明确；header 锁定保留",
+        "updates": [ { "id": "body", "content": "<rect width=\"640\" height=\"320\" fill=\"#f3f6fa\"/><text x=\"32\" y=\"64\" font-size=\"20\">待处理异常</text><text x=\"32\" y=\"136\" font-size=\"52\" fill=\"#172640\">12</text><rect x=\"32\" y=\"202\" width=\"260\" height=\"64\" rx=\"12\" fill=\"#315be8\"/><text x=\"56\" y=\"243\" font-size=\"22\" fill=\"#ffffff\">立即处理 12 项异常</text>" } ]
+      }
+    },
+    { "tool": "design_manage", "input": { "action": "compare", "revision": 2 } },
+    {
+      "tool": "design_manage",
+      "input": {
+        "action": "spec",
+        "spec": {
+          "colors": [ { "role": "标题背景", "value": "#172640" }, { "role": "主操作", "value": "#315be8" }, { "role": "画布", "value": "#f3f6fa" } ],
+          "typography": [ { "role": "标题", "family": "Arial", "size": 28, "weight": 400 }, { "role": "操作", "family": "Arial", "size": 22, "weight": 400 } ],
+          "spacing": [8, 16, 24, 32], "radii": [12],
+          "components": [ { "name": "主按钮", "rule": "每屏一个主操作，文字说明动作与对象；高度至少 56" } ]
+        }
+      }
+    },
+    {
+      "tool": "design_manage",
+      "input": {
+        "action": "review",
+        "review": {
+          "author": "assistant",
+          "items": [
+            { "dimension": "Intent", "finding": "操作文案对应处理异常目标", "evidence": [ { "region": "body", "quote": "立即处理 12 项异常" } ], "next": "请用户确认动作是否符合工作顺序" },
+            { "dimension": "Hierarchy", "finding": "数字 52 字号高于操作 22 字号；仍需人工看图", "evidence": [ { "region": "body", "quote": "font-size=\"52\"" } ], "next": "用 read 检查主次层级" },
+            { "dimension": "Clarity", "finding": "按钮写出动作与异常数量", "evidence": [ { "region": "body", "quote": "立即处理 12 项异常" } ], "next": "确认业务口径是否准确" },
+            { "dimension": "Consistency", "finding": "按钮主色与规范一致", "evidence": [ { "region": "body", "quote": "fill=\"#315be8\"" } ], "next": "人工检查其余屏的颜色与间距" },
+            { "dimension": "Feasibility", "finding": "基本矩形和文字可实现为普通界面组件；尚未实现交互", "evidence": [ { "region": "body", "quote": "height=\"64\" rx=\"12\"" } ], "next": "交接开发后单独验证真实运行和无障碍" }
+          ]
+        }
+      }
+    },
+    { "tool": "design_manage", "input": { "action": "protect", "regions": ["header"], "status": "editable" } },
+    {
+      "tool": "design_render",
+      "input": {
+        "name": "detail", "note": "第二屏静态详情，不是真实运行页面",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"420\" viewBox=\"0 0 640 420\" font-family=\"Arial\"><svg id=\"header\" x=\"0\" y=\"0\" width=\"640\" height=\"100\" viewBox=\"0 0 640 100\" overflow=\"hidden\"><rect width=\"640\" height=\"100\" fill=\"#172640\"/><text x=\"32\" y=\"60\" font-size=\"28\" fill=\"#ffffff\">异常详情 · 订单 1024</text></svg><svg id=\"body\" x=\"0\" y=\"100\" width=\"640\" height=\"320\" viewBox=\"0 0 640 320\" overflow=\"hidden\"><rect width=\"640\" height=\"320\" fill=\"#f3f6fa\"/><text x=\"32\" y=\"64\" font-size=\"24\">库存不足，需要人工确认</text><text x=\"32\" y=\"118\" font-size=\"20\">当前状态：待处理</text><rect x=\"32\" y=\"202\" width=\"260\" height=\"64\" rx=\"12\" fill=\"#315be8\"/><text x=\"56\" y=\"243\" font-size=\"22\" fill=\"#ffffff\">确认处理方案</text></svg></svg>"
+      }
+    },
+    {
+      "tool": "design_render",
+      "input": {
+        "name": "order-flow", "note": "实际 SVG frame，静态连接，无真实点击",
+        "flow": { "nodes": [ { "id": "overviewScreen", "label": "异常概览", "artifact": "overview" }, { "id": "detailScreen", "label": "处理详情", "artifact": "detail" } ], "edges": [ { "from": "overviewScreen", "to": "detailScreen", "label": "立即处理" } ] }
+      }
+    },
+    { "tool": "design_manage", "input": { "action": "history" } }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "captured_at": "2026-09-07T08:23:04Z",
+  "checks": {
+    "typescript": "passed",
+    "tests": "16/16 passed",
+    "npm_audit": "0 vulnerabilities",
+    "npm_pack": "9 entries; video excluded from tarball",
+    "clean_tarball_install": "passed",
+    "pi_loader": {
+      "tools": [
+        "design_render",
+        "design_manage"
+      ],
+      "commands": [
+        "design",
+        "design-stop"
+      ]
+    },
+    "local_path_scan": "passed",
+    "secret_pattern_scan": "passed"
+  },
+  "package_sha256": "a845afca16db709edbab172893d865a376eae8b2bdc1a244a799a993a3649778",
+  "video_sha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361"
+}

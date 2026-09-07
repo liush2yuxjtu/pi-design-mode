@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "status": "prepared",
+  "artifact": "pi-design-mode",
+  "version": "0.1.0",
+  "license": "MIT (pending owner confirmation)",
+  "canonicalRepository": "https://github.com/liush2yuxjtu/pi-design-mode",
+  "channels": {
+    "github": "prepared",
+    "npm": "prepared; authentication required",
+    "piGallery": "waiting for npm publication"
+  },
+  "video": {
+    "path": "assets/pi-design-mode-product-demo.mp4",
+    "sha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361",
+    "galleryUrl": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/pi-design-mode-product-demo.mp4"
+  },
+  "preparedAt": "2026-09-07T08:23:04Z",
+  "package": {
+    "filename": "pi-design-mode-0.1.0.tgz",
+    "size": 23924,
+    "sha256": "a845afca16db709edbab172893d865a376eae8b2bdc1a244a799a993a3649778",
+    "integrity": "sha512-L1bVk7107tIHo0nJI7r5ye7qT2tUyXh0UaSinSyyll05LR+5axYmpKD160smYNST1EC9reccPpuKYJwXdLwFbA==",
+    "entries": 9
+  }
+}
