@@ -1,0 +1,22 @@
+from pathlib import Path
+import subprocess,json,tempfile,sys
+from playwright.sync_api import sync_playwright,expect
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'artifacts/site';OUT.mkdir(parents=True,exist_ok=True)
+proc=None
+if len(sys.argv)>1:url=sys.argv[1]
+else:
+ import http.server,threading
+ handler=lambda *a,**kw:http.server.SimpleHTTPRequestHandler(*a,directory=str(ROOT/'site'),**kw)
+ server=http.server.ThreadingHTTPServer(('127.0.0.1',0),handler);threading.Thread(target=server.serve_forever,daemon=True).start();url=f'http://127.0.0.1:{server.server_port}/'
+try:
+ with sync_playwright() as p:
+  b=p.chromium.launch(headless=True);ctx=b.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1000});page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)));response=page.goto(url);assert response.status==200
+  expect(page.locator('html')).to_have_attribute('lang','en');page.locator('#copy').click();expect(page.locator('#copy-status')).to_have_text('Copied');assert page.evaluate('navigator.clipboard.readText()')=='pi install npm:pi-design-mode@0.2.1'
+  page.locator('#language').click();expect(page.locator('html')).to_have_attribute('lang','zh-CN');expect(page.locator('h1')).to_contain_text('留在文件里');page.screenshot(path=str(OUT/'zh-desktop.png'),full_page=True)
+  page.locator('#language').click();page.locator('video').scroll_into_view_if_needed();page.evaluate("document.querySelector('video').play()");page.wait_for_timeout(1500);assert page.evaluate("document.querySelector('video').currentTime")>0;page.evaluate("document.querySelector('video').pause()");page.screenshot(path=str(OUT/'en-desktop.png'),full_page=True)
+  for width in [390,768,1440]:
+   page.set_viewport_size({'width':width,'height':900});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
+  page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(OUT/'mobile.png'),full_page=True);assert not errors,errors
+  evidence={'url':url,'status':response.status,'checks':['en','zh','copy','video-playback','no-horizontal-overflow-390-768-1440'],'errors':errors};(OUT/'evidence.json').write_text(json.dumps(evidence,indent=2));print(json.dumps(evidence));b.close()
+finally:
+ if len(sys.argv)==1:server.shutdown();server.server_close()

@@ -1,0 +1,4 @@
+let language='en';
+const toggle=document.getElementById('language');
+toggle.addEventListener('click',()=>{language=language==='en'?'zh':'en';document.documentElement.lang=language==='en'?'en':'zh-CN';document.querySelectorAll('[data-en]').forEach(el=>el.textContent=el.dataset[language]);toggle.textContent=language==='en'?'中文':'English';toggle.setAttribute('aria-label',language==='en'?'Switch to Chinese':'切换为英文');document.getElementById('copy-status').textContent='';});
+document.getElementById('copy').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText('pi install npm:pi-design-mode@0.2.1');status.textContent=language==='en'?'Copied':'已复制';}catch{status.textContent=language==='en'?'Select and copy the command above.':'请选中上方命令复制。';}});

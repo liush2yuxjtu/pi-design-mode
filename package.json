@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
@@ -12,7 +12,7 @@
   ],
   "author": "liush2yuxjtu",
   "license": "MIT",
-  "homepage": "https://github.com/liush2yuxjtu/pi-design-mode#readme",
+  "homepage": "https://liush2yuxjtu.github.io/pi-design-mode/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/liush2yuxjtu/pi-design-mode.git"
@@ -35,7 +35,8 @@
     "extensions/html-studio/seed",
     "extensions/html-studio/WORKFLOW.md",
     "SECURITY.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "README.zh-CN.md"
   ],
   "scripts": {
     "start": "node extensions/html-studio/server.mjs",
@@ -56,6 +57,8 @@
   "pi": {
     "extensions": [
       "./extensions/html-studio/extension.ts"
-    ]
+    ],
+    "video": "https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4",
+    "image": "https://liush2yuxjtu.github.io/pi-design-mode/poster.png"
   }
 }
