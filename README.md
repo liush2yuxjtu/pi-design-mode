@@ -107,7 +107,7 @@ npm run test:extension
 npm pack --dry-run
 ```
 
-Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` with an external Playwright Python installation.
+Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` (editor) and `tools/check-site.py` (landing page), with an external Playwright Python installation.
 
 The website is static HTML/CSS/JS in `site/`. The UI recording harness is in `tools/demo-video/`; it uses a disposable workspace and records on the maintainer's Mac mini. Media is not included in the npm runtime tarball.
 

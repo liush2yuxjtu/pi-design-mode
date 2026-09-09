@@ -35,4 +35,7 @@ try:
   if record:video.save_as(str(OUT/'raw.webm'))
   browser.close()
  (OUT/'evidence.json').write_text(json.dumps({'record':record,'markers':markers,'checks':['headline','tokens','disk-v1','local-interaction','export','standalone-interaction','target-framing'],'modelInvoked':False,'subtitles':False,'intro':False,'privacy':'Private path/proof fields omitted; studio event sidebar hidden for framing. Real file service, not Pi model invocation.'},ensure_ascii=False,indent=2))
-finally:proc.terminate();proc.wait(timeout=10)
+finally:
+ proc.terminate()
+ try:proc.wait(timeout=10)
+ except subprocess.TimeoutExpired:proc.kill();proc.wait()
