@@ -1,74 +1,31 @@
 {
-  "schema": 1,
-  "status": "published-and-verified",
-  "artifact": "pi-design-mode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
-  "canonicalRepository": "https://github.com/liush2yuxjtu/pi-design-mode",
+  "repository": "https://github.com/liush2yuxjtu/pi-design-mode",
+  "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.2.0",
+  "npm": "https://www.npmjs.com/package/pi-design-mode/v/0.2.0",
+  "gallery": "https://pi.dev/packages/pi-design-mode",
   "channels": {
-    "github": {
-      "status": "published-and-verified",
-      "url": "https://github.com/liush2yuxjtu/pi-design-mode",
-      "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.1.0"
-    },
-    "npm": {
-      "status": "published-and-verified",
-      "url": "https://www.npmjs.com/package/pi-design-mode",
-      "version": "0.1.0",
-      "maintainer": "nyn5255"
-    },
-    "piGallery": {
-      "status": "indexed-and-verified",
-      "url": "https://pi.dev/packages/pi-design-mode",
-      "videoMetadata": "present"
+    "github": "verified",
+    "npm": "verified-install",
+    "gallery": "verified-version"
+  },
+  "integrity": "sha512-BcJNno/3sIeDdMThEjoWIhs3uFfAEV1tViEpLnWSabcudzxQhPdYw6p033VkWDwEbyB85O5qBeumJazJTU57fQ==",
+  "provenance": {
+    "url": "https://registry.npmjs.org/-/npm/v1/attestations/pi-design-mode@0.2.0",
+    "provenance": {
+      "predicateType": "https://slsa.dev/provenance/v1"
     }
   },
-  "video": {
-    "path": "assets/pi-design-mode-product-demo.mp4",
-    "sha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361",
-    "galleryUrl": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/pi-design-mode-product-demo.mp4"
-  },
-  "preparedAt": "2026-09-07T08:23:04Z",
-  "package": {
-    "filename": "pi-design-mode-0.1.0.tgz",
-    "size": 88986,
-    "sha256": "cea07399223d6fe93be7b177209faeb3229b7d0ed1073f92cebffa137dc199e0",
-    "integrity": "sha512-QfCi0VeXZ0xlv7Ime81B2Po0TEwAnFCdAEHJe7UtDY/4qPoeUZiXvo9XBKXXLXxftrPFggl6w/DKa7aJ690v8A==",
-    "entries": 11,
-    "sourceCommit": "2c6b91f54802945414f01ecc628221474eea5de8"
-  },
-  "validatedAt": "2026-09-07T08:55:20Z",
-  "source": {
-    "commit": "2c6b91f54802945414f01ecc628221474eea5de8",
-    "tag": "v0.1.0",
-    "tagStatus": "published",
-    "tagCommit": "7383a088089d1306f077ae6175bcf2498a24f528"
-  },
-  "validationProvenance": {
-    "record": ".build-in-public/validation.json",
-    "commands": [
-      "npm run check",
-      "npm test",
-      "npm pack --dry-run --ignore-scripts --json",
-      "npm install --ignore-scripts --omit=dev <pi-design-mode-0.1.0.tgz>",
-      "Pi loadExtensions smoke assertion",
-      "GitHub GET private-vulnerability-reporting",
-      "release local-path and secret-pattern scan",
-      "pi install npm:pi-design-mode"
-    ]
-  },
-  "publishedAt": "2026-09-07T10:10:59Z",
+  "publishRun": "https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34331614299",
+  "publishRunCaveat": "publish succeeded; immediate registry lookup failed on temporary 404; later verified independently",
   "verification": {
-    "verifiedAt": "2026-09-07T10:14:09Z",
-    "installCommand": "pi install npm:pi-design-mode",
-    "loaderTools": [
-      "design_render",
-      "design_manage"
-    ],
-    "loaderCommands": [
-      "design",
-      "design-stop"
-    ],
-    "publicVideoSha256": "b0a1a50382de5087f2c9d44047c6f5eb24d9c48fa84617f733b6d0ae1cc0c361"
-  }
+    "backendTests": 14,
+    "browserRegressionTests": 3,
+    "officialPiInstall": true,
+    "officialLoader": true,
+    "githubNpmFilesIdentical": true,
+    "modelInvokedDuringInstallTest": false
+  },
+  "capturedAt": "2026-09-09T09:00:15.648699+00:00"
 }
