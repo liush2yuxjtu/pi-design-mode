@@ -1,39 +1,47 @@
 # Pi Design Mode
 
-在 Pi 中用 `/design` 打开本地 HTML 设计工作区。编辑 tokens 和组件，保存版本，导出可独立交互的 HTML。
+**English** · [简体中文](README.zh-CN.md) · [Website & demo](https://liush2yuxjtu.github.io/pi-design-mode/)
 
-## 安装
+A local HTML design workspace inside Pi. Edit tokens and components, keep revisions, and export interactive HTML.
 
-需要 macOS、Node.js 22+ 和 Pi。扩展集成测试针对 Pi 0.85.1；其他版本尚未验证。
+[![Real UI walkthrough](https://liush2yuxjtu.github.io/pi-design-mode/poster.png)](https://liush2yuxjtu.github.io/pi-design-mode/#demo)
+
+[Watch the demo](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [Download MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
+
+Real local editor operations: change a headline, adjust tokens, save, and interact with an exported page. No title cards or subtitles. This recording does not show model invocation. Private path fields are hidden.
+
+## Installation
+
+Requires macOS, Node.js 22+, and Pi. Integration tests target Pi 0.85.1; other versions are not verified.
 
 ```bash
-pi install npm:pi-design-mode@0.2.0
+pi install npm:pi-design-mode@0.2.1
 ```
 
-在 Pi 中输入 `/reload`，然后输入 `/design`，点击返回的控制面板链接。不会自动弹出浏览器。
+In Pi, enter `/reload`, then `/design`. Follow the control-panel link. The extension does not automatically open a browser.
 
-升级已有 npm 安装：
+Update an unpinned npm installation:
 
 ```bash
 pi update npm:pi-design-mode
 ```
 
-固定版本用户可重新运行上述安装命令。不要同时加载旧的手工 `/design` 扩展与此包；先在 `pi config` 停用重复入口，保留原项目文件。
+For a pinned installation, run the versioned install command again. Do not load a manually installed `/design` extension alongside this package. Disable duplicate entries in `pi config`, keeping existing project files.
 
-## 能做什么
+## Features
 
-- 调整强调色、圆角、间距和现有明暗主题。
-- 选中约定的组件，编辑标题，切换指标网格或列表。
-- 锁定标题；草稿撤销、重做和保存版对照。
-- 保存磁盘版本，恢复历史，检测并发修改。
-- 将浏览器需求发送给当前 Pi 会话，不启动子代理。
-- 导出 HTML/CSS/JS，附 SHA-256 回执。无需部署即可交互。
+- Preview accent, radius, spacing, and existing light/dark themes.
+- Select supported components, edit a headline, and switch metric grids or lists.
+- Lock the headline; undo, redo, and compare drafts against the saved version.
+- Save persistent revisions, restore history, and detect conflicting edits.
+- Send browser requests to the current Pi session without spawning subagents.
+- Export interactive HTML/CSS/JS with a SHA-256 receipt. No deployment required.
 
-**编辑模式**选中组件；**交互模式**操作原型。浏览器草稿在点击“应用到项目”后写盘；Pi 调用 `design_workspace apply` 也会真实写盘。
+**Edit mode** selects components. **Interaction mode** operates the prototype. Browser drafts reach disk when you apply them. A Pi `design_workspace apply` call also writes to disk.
 
-## 设计真源
+## Sources of truth
 
-项目目录下的 `.pi-design/` 保存设计与历史。在用户 Home 目录启动时，使用 `~/projects/pi-design-workspace/.pi-design/`。
+Project files live in `.pi-design/`. When started from the user's home directory, the workspace uses `~/projects/pi-design-workspace/.pi-design/` instead.
 
 ```text
 .pi-design/
@@ -48,46 +56,48 @@ pi update npm:pi-design-mode
   frontend-v1/
 ```
 
-`tokens.css` 是数值真源，`components.html` 是组件真源。说明文档、预览和前端不能反向覆盖它们。
+`tokens.css` owns design values. `components.html` owns component design and references those tokens. Documentation, previews, and exported frontends follow these sources, not the other way around.
 
-## 命令
+## Commands
 
 ```text
 /design
-/design edit 把强调色改成蓝色
-/design reference 查找适合当前项目的参考
-/design system 审计当前 tokens 与组件
-/design frontend 将批准的设计做成可运行前端
+/design edit Change the accent to blue
+/design reference Find references for this project
+/design system Audit the current tokens and components
+/design frontend Turn the approved design into a runnable frontend
 /design-stop
 ```
 
-后四项把需求交给当前模型。扩展不自带搜索或工程生成引擎；完整参考、系统审计与框架前端工作流尚未做端到端验收。随包 [WORKFLOW.md](extensions/html-studio/WORKFLOW.md) 提供可移植说明，不依赖作者的私有技能或配置文件。
+Requests go to the current model. The extension does not bundle a search service or an engineering-generation engine. Complete reference, system-audit, and framework-build workflows have not been validated end to end. The bundled [WORKFLOW.md](extensions/html-studio/WORKFLOW.md) describes the contract without requiring the author's private skills or configuration.
 
-## 边界
+## Limits
 
-- 支持约定的示例组件，不是任意 HTML 导入或任意元素编辑器。
-- 两个画板来自同一组件源，不是两个独立应用。
-- 经营数据是示例；聊天只是本地回显，没有生产 Agent 后端。
-- 导出原生 HTML，不代表完成 Next.js/Vercel 模板转换、框架构建或部署。
-- 预置参考只是候选或入口，不代表已经完成项目调研。
-- 保存会重建预览 iframe，内部滚动可能归零；窄按钮中文可能换行。这些界面问题尚未修复。
-- v0.2 使用 HTML 工作区替代 v0.1 的 SVG 入口。旧 SVG 草稿不会删除，也不会自动迁移；需要旧功能可安装 `pi-design-mode@0.1.0`。
+- Edits supported sample components, not arbitrary HTML or arbitrary elements.
+- Both artboards derive from the same component source, not separate applications.
+- Business figures are samples. Chat is a local echo, not a production agent backend.
+- Native HTML export is not a Next.js/Vercel conversion, framework build, or deployment.
+- Seed references are candidates or discovery entry points, not completed research.
+- Saving recreates preview iframes and may reset their internal scroll. Narrow Chinese buttons may wrap. These UI issues remain unresolved.
+- Version 0.2 replaces the 0.1 SVG entry point with the HTML workspace. Old SVG drafts are preserved but not migrated. Install `pi-design-mode@0.1.0` if you need the old workflow.
 
-## 权限与隐私
+## Permissions and privacy
 
-扩展在 Pi 进程中运行，具有同一操作系统用户的权限，不是操作系统沙箱。工作区服务只监听 `127.0.0.1`，API 使用随机授权令牌及 Host/Origin 检查。预览 iframe 受 sandbox/CSP 限制。
+Pi extensions run with the operating-system user's permissions. This is not an OS sandbox. The workspace binds only to `127.0.0.1`; APIs use a random capability token and Host/Origin checks. Preview iframes use sandbox and CSP restrictions.
 
-不包含自定义遥测。不收集使用统计。模型调用由用户现有 Pi provider 执行，相应请求受该 provider 的隐私和费用政策约束。勿分享授权链接或将服务暴露到公网。详见 [SECURITY.md](SECURITY.md)。
+No custom telemetry or usage analytics. Model requests use your existing Pi provider and its privacy and billing policies. Do not share capability links or expose the server publicly. See [SECURITY.md](SECURITY.md).
 
-## 卸载
+## Uninstall
+
+First use `/design-stop` to close the workspace server, then:
 
 ```bash
 pi remove npm:pi-design-mode
 ```
 
-先执行 `/design-stop` 关闭工作区服务。卸载不会删除 `.pi-design/` 中的设计、历史和导出文件。
+Uninstalling does not delete designs, revisions, or exports under `.pi-design/`.
 
-## 开发与验证
+## Development and verification
 
 ```bash
 npm ci
@@ -97,10 +107,12 @@ npm run test:extension
 npm pack --dry-run
 ```
 
-测试覆盖磁盘版本、并发冲突、标题锁、符号链接、事务恢复、HTTP 授权、导出，以及官方 Pi loader、命令、工具和会话生命周期。集成测试不调用模型。
+Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` (editor) and `tools/check-site.py` (landing page), with an external Playwright Python installation.
 
-## 支持与许可证
+The website is static HTML/CSS/JS in `site/`. The UI recording harness is in `tools/demo-video/`; it uses a disposable workspace and records on the maintainer's Mac mini. Media is not included in the npm runtime tarball.
 
-[问题反馈](https://github.com/liush2yuxjtu/pi-design-mode/issues) · [npm](https://www.npmjs.com/package/pi-design-mode) · [Pi Package Gallery](https://pi.dev/packages)
+## Support and license
 
-[MIT](LICENSE)。维护者：[@liush2yuxjtu](https://github.com/liush2yuxjtu)。
+[Issues](https://github.com/liush2yuxjtu/pi-design-mode/issues) · [npm](https://www.npmjs.com/package/pi-design-mode) · [Pi Gallery](https://pi.dev/packages/pi-design-mode) · [Publishing](PUBLISHING.md)
+
+[MIT](LICENSE). Maintained by [@liush2yuxjtu](https://github.com/liush2yuxjtu).
