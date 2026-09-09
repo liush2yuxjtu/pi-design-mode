@@ -2,11 +2,11 @@
 
 [English](README.md) · **简体中文** · [官网与演示](https://liush2yuxjtu.github.io/pi-design-mode/)
 
-[![真实 UI 操作演示](https://liush2yuxjtu.github.io/pi-design-mode/poster.png)](https://liush2yuxjtu.github.io/pi-design-mode/#demo)
+[![真实 UI 操作演示](https://liush2yuxjtu.github.io/pi-design-mode/poster.png)](https://liush2yuxjtu.github.io/pi-design-mode/?lang=zh#demo)
 
-[观看视频](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [下载 MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
+[观看中文原片](https://liush2yuxjtu.github.io/pi-design-mode/?lang=zh#demo) · [中文 MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4) · [English MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4)
 
-视频使用此前确认的原版：左侧真实 Pi TUI，右侧 HTML。包含实际 design_workspace inspect/apply 模型工具调用、tokens 调整与导出 HTML 交互。没有片头或字幕，仅遮挡本机路径和 provider 信息。
+中文视频保留此前确认的约 63 秒原版；另有新录制的约 70 秒英文版。两版均为左侧真实 Pi TUI、右侧 HTML，包含实际 inspect/apply 模型工具调用、tokens 与导出交互。没有片头或字幕，仅做隐私遮挡。
 
 在 Pi 中用 `/design` 打开本地 HTML 设计工作区。编辑 tokens 和组件，保存版本，导出可独立交互的 HTML。
 
@@ -15,7 +15,7 @@
 需要 macOS、Node.js 22+ 和 Pi。扩展集成测试针对 Pi 0.85.1；其他版本尚未验证。
 
 ```bash
-pi install npm:pi-design-mode@0.2.2
+pi install npm:pi-design-mode@0.3.0
 ```
 
 在 Pi 中输入 `/reload`，然后输入 `/design`，点击返回的控制面板链接。不会自动弹出浏览器。
@@ -27,6 +27,16 @@ pi update npm:pi-design-mode
 ```
 
 固定版本用户可重新运行上述安装命令。不要同时加载旧的手工 `/design` 扩展与此包；先在 `pi config` 停用重复入口，保留原项目文件。
+
+## 英文界面
+
+在项目目录启动：
+
+```bash
+PI_DESIGN_LANGUAGE=en pi
+```
+
+再输入 `/design`。未设置时保持中文。更改环境变量后需要重启 Pi；它影响编辑器界面和新建示例，不会自动翻译已有设计，也不控制模型回复语言。部分诊断信息和工作流说明仍为中文。
 
 ## 能做什么
 

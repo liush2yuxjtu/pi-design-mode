@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
@@ -36,7 +36,9 @@
     "extensions/html-studio/WORKFLOW.md",
     "SECURITY.md",
     "CHANGELOG.md",
-    "README.zh-CN.md"
+    "README.zh-CN.md",
+    "extensions/html-studio/locale.mjs",
+    "extensions/html-studio/english.json"
   ],
   "scripts": {
     "start": "node extensions/html-studio/server.mjs",
@@ -58,7 +60,7 @@
     "extensions": [
       "./extensions/html-studio/extension.ts"
     ],
-    "video": "https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4",
-    "image": "https://liush2yuxjtu.github.io/pi-design-mode/poster.png"
+    "video": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4",
+    "image": "https://liush2yuxjtu.github.io/pi-design-mode/poster-en.png"
   }
 }

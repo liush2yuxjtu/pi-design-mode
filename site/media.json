@@ -1,0 +1,16 @@
+{
+  "en": {
+    "file": "demo-en.mp4",
+    "duration": 70.04,
+    "width": 1920,
+    "height": 984,
+    "sha256": "0538ec4dec48629a2ef1e879ff0646e187297ede2ce4264fa8d364e13aec94a9"
+  },
+  "zh": {
+    "file": "demo.mp4",
+    "duration": 62.708333,
+    "width": 1920,
+    "height": 984,
+    "sha256": "910fcac7d48267f60c07d70ffabd957c97eb78c0aefb938cc1b354ea40c1149c"
+  }
+}

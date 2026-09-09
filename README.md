@@ -4,21 +4,27 @@
 
 A local HTML design workspace inside Pi. Edit tokens and components, keep revisions, and export interactive HTML.
 
-[![Real UI walkthrough](https://liush2yuxjtu.github.io/pi-design-mode/poster.png)](https://liush2yuxjtu.github.io/pi-design-mode/#demo)
+[![Real UI walkthrough](https://liush2yuxjtu.github.io/pi-design-mode/poster-en.png)](https://liush2yuxjtu.github.io/pi-design-mode/#demo)
 
-[Watch the demo](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [Download MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
+[Watch in English](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [English MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4) · [中文视频](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
 
-The approved original recording: real Pi TUI on the left, HTML on the right. It includes actual model calls to design_workspace inspect/apply, token edits, and exported HTML interactions. No title cards or subtitles. Only local paths and provider details are masked.
+Two real recordings: the new 70-second English demo and the unchanged, approved 63-second Chinese original. Both show real Pi TUI on the left and HTML on the right, including actual inspect/apply calls, edits, and export. No title cards or subtitles. Private paths and provider details are masked.
 
 ## Installation
 
 Requires macOS, Node.js 22+, and Pi. Integration tests target Pi 0.85.1; other versions are not verified.
 
 ```bash
-pi install npm:pi-design-mode@0.2.2
+pi install npm:pi-design-mode@0.3.0
 ```
 
-In Pi, enter `/reload`, then `/design`. Follow the control-panel link. The extension does not automatically open a browser.
+For the English interface, start Pi from your project directory with:
+
+```bash
+PI_DESIGN_LANGUAGE=en pi
+```
+
+Then enter `/design` and follow the control-panel link. Chinese remains the default when the variable is unset. Restart Pi when changing this environment setting. It localizes the editor chrome and new sample workspaces, not your existing design content or your model's language preference. Existing projects are never automatically translated. Some diagnostic messages and workflow instructions remain Chinese. The extension does not automatically open a browser.
 
 Update an unpinned npm installation:
 
@@ -109,7 +115,7 @@ npm pack --dry-run
 
 Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` (editor) and `tools/check-site.py` (landing page), with an external Playwright Python installation.
 
-The website is static HTML/CSS/JS in `site/`. The earlier UI-only recording harness is in `tools/demo-video/`; it is not the source of the selected TUI video. The selected video reuses the user-approved original recording, with privacy masking on the maintainer's Mac mini. Media is not included in the npm runtime tarball.
+The website is static HTML/CSS/JS in `site/`. The earlier UI-only recording harness is in `tools/demo-video/`; it is not the source of either selected TUI video. The Chinese video reuses the approved original; the English video is a new real TUI session using the shipped English locale. Both were recorded and privacy-processed on the maintainer's Mac mini. Media is not included in the npm runtime tarball.
 
 ## Support and license
 
