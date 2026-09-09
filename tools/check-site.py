@@ -25,7 +25,7 @@ try:
    if page.locator('html').get_attribute('lang')!=('en' if language=='en' else 'zh-CN'):page.locator('#language').click()
    video=page.locator('video');video.scroll_into_view_if_needed()
    page.evaluate("document.querySelector('video').play()")
-   page.wait_for_timeout(1400)
+   page.wait_for_function("document.querySelector('video').currentTime > 0.3",timeout=20000)
    actual=video.evaluate('(v)=>({time:v.currentTime,duration:v.duration,width:v.videoWidth,height:v.videoHeight,src:v.currentSrc})')
    expected=media[language]
    assert actual['time']>0 and abs(actual['duration']-expected['duration'])<.1,actual
