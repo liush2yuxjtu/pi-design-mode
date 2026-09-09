@@ -1,8 +1,15 @@
 # Release report
 
-## 0.2.0 候选：尚未发布
+## 0.2.0 已公开发布与安装验证
 
-HTML 工作区、随包工作流、README、权限说明、CI 和 npm 包已经准备。14/14 测试、源码检查、官方 Pi loader 和一次干净 tarball 安装通过。公共元数据仍为 0.1.0。npm 当前凭据返回 E401，需要官方重新授权。首次 0.2.0 公开操作前确认现有 GitHub/npm/Gallery、MIT 和版本。原开发目录未提交工作保留。
+- [GitHub Release](https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.2.0)：公开 tarball 下载与内容校验通过。
+- [npm 0.2.0](https://www.npmjs.com/package/pi-design-mode/v/0.2.0)：官方 registry 已返回该版本，SHA-512 与下载包一致，文件内容与 GitHub 发布包逐项一致。
+- 独立 Pi 配置目录执行 `pi install npm:pi-design-mode@0.2.0` 成功，官方 loader、命令、inspect/apply、磁盘、会话关闭检查通过；没有调用模型。
+- 14/14 后端测试、3/3 真实浏览器回归、TypeScript 和 GitHub CI 通过。
+- [真实 OIDC 发布](https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34331614299)：发布步骤成功，附 SLSA provenance；紧接着的 registry 查询遇到暂时 404，使该运行整体显示失败。后续独立查询与安装确认包已经发布，不重发同版本。
+- [Pi Gallery](https://pi.dev/packages/pi-design-mode)：普通浏览器访问 HTTP 200，已显示版本 0.2.0、HTML 工作区描述、作者 nyn5255 和 MIT。原始 HTTP 客户端曾返回 403；浏览器证据已另行验证。
+- npm downloads API 返回 404，Gallery 显示 not available，统计暂不可用，不记为零。
+- 既有未提交开发工作保留。发布不依赖本机 npm login 或长期 Token。
 
 以下内容为 **0.1.0 历史发布记录**，不是 0.2.0 发布证明。
 

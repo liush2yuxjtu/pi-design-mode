@@ -1,5 +1,9 @@
 # 公开发布计划
 
+## 最新状态
+
+0.2.0 已通过 GitHub Actions OIDC 发布，GitHub/npm/Gallery 三处公开版本与干净安装已核验。用户已完成 npm Trusted Publisher 绑定；后续不依赖本机登录。详细证据见 release-report.md。以下准备阶段认证与批准描述属于历史状态，不是仍需用户处理的事项。
+
 ## Canonical artifact and version
 
 既有公开仓库 `liush2yuxjtu/pi-design-mode`，既有 npm 名 `pi-design-mode`，维护者 `nyn5255`，沿用 MIT。候选版本 0.2.0。默认 /design 改为 HTML 工作区，旧 SVG 文件不自动迁移。
