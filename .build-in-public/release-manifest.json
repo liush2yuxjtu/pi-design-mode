@@ -1,31 +1,47 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "repository": "https://github.com/liush2yuxjtu/pi-design-mode",
-  "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.2.0",
-  "npm": "https://www.npmjs.com/package/pi-design-mode/v/0.2.0",
+  "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.3.0",
+  "npm": "https://www.npmjs.com/package/pi-design-mode/v/0.3.0",
   "gallery": "https://pi.dev/packages/pi-design-mode",
-  "channels": {
-    "github": "verified",
-    "npm": "verified-install",
-    "gallery": "verified-version"
-  },
-  "integrity": "sha512-BcJNno/3sIeDdMThEjoWIhs3uFfAEV1tViEpLnWSabcudzxQhPdYw6p033VkWDwEbyB85O5qBeumJazJTU57fQ==",
+  "website": "https://liush2yuxjtu.github.io/pi-design-mode/",
+  "integrity": "sha512-V47gmCqVY7G4Mgz5L8MD4cIL5S/Id+FmUuGxgdZtdXEqzA0elIdhFASZfdh313OpZM59ZE7eWxuNGRf6b/dV8A==",
   "provenance": {
-    "url": "https://registry.npmjs.org/-/npm/v1/attestations/pi-design-mode@0.2.0",
+    "url": "https://registry.npmjs.org/-/npm/v1/attestations/pi-design-mode@0.3.0",
     "provenance": {
       "predicateType": "https://slsa.dev/provenance/v1"
     }
   },
-  "publishRun": "https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34331614299",
-  "publishRunCaveat": "publish succeeded; immediate registry lookup failed on temporary 404; later verified independently",
-  "verification": {
-    "backendTests": 14,
-    "browserRegressionTests": 3,
-    "officialPiInstall": true,
-    "officialLoader": true,
-    "githubNpmFilesIdentical": true,
-    "modelInvokedDuringInstallTest": false
+  "videos": {
+    "en": {
+      "file": "demo-en.mp4",
+      "duration": 70.04,
+      "width": 1920,
+      "height": 984,
+      "sha256": "0538ec4dec48629a2ef1e879ff0646e187297ede2ce4264fa8d364e13aec94a9"
+    },
+    "zh": {
+      "file": "demo.mp4",
+      "duration": 62.708333,
+      "width": 1920,
+      "height": 984,
+      "sha256": "910fcac7d48267f60c07d70ffabd957c97eb78c0aefb938cc1b354ea40c1149c"
+    }
   },
-  "capturedAt": "2026-09-09T09:00:15.648699+00:00"
+  "verified": {
+    "npmInstall": true,
+    "piLoader": [
+      "zh",
+      "en"
+    ],
+    "websitePlayback": [
+      "zh",
+      "en"
+    ],
+    "galleryPrimary": "en",
+    "chineseOriginalUnchanged": true
+  },
+  "publishRun": "https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34348021790",
+  "capturedAt": "2026-09-09T12:19:23.622975+00:00"
 }
