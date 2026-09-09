@@ -88,8 +88,13 @@ jobs:
             await new Promise(resolve=>setTimeout(resolve,Math.max(10000,delay)));
           }
           if(metadata?.version!==version||!metadata.dist?.integrity)throw new Error('Invalid registry metadata');
-          const tar=await fetch(metadata.dist.tarball,{signal:AbortSignal.timeout(30000)});
-          if(!tar.ok)throw new Error(`Tarball HTTP ${tar.status}`);
+          let tar;
+          for(let attempt=0;attempt<3;attempt++) {
+            tar=await fetch(metadata.dist.tarball,{signal:AbortSignal.timeout(30000)});
+            if(tar.ok)break;
+            if(tar.status!==404||attempt===2)throw new Error(`Tarball HTTP ${tar.status}`);
+            await new Promise(resolve=>setTimeout(resolve,10000));
+          }
           const actual='sha512-'+createHash('sha512').update(Buffer.from(await tar.arrayBuffer())).digest('base64');
           if(actual!==metadata.dist.integrity)throw new Error('Tarball integrity mismatch');
           console.log(JSON.stringify({name,version,integrity:actual,verified:true}));
