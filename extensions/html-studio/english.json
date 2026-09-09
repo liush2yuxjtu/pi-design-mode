@@ -223,5 +223,9 @@
   "主题": "Theme",
   "组件": "Components",
   "边界": "Limits",
-  "初始化": "Initialize"
+  "初始化": "Initialize",
+  "打开真实 HTML 设计工作区；/design reference|system|frontend <需求> 交给当前 Pi": "Open the HTML workspace; /design reference|system|frontend <request> routes to the current Pi session",
+  "关闭设计服务，保留所有真源与版本": "Stop the design server, preserving sources and revisions",
+  "打开或读取真实 HTML 设计工作区；先调用 {action:\"inspect\"}，再将结果 etag 原样放入 apply 的 base 参数，防冲突写入受支持的 token、标题、布局、说明、参考。不能解除锁。完整输出保留在项目文件，工具文本限 20KB。": "Open or inspect the real HTML workspace. Call {action:\"inspect\"} first, then copy its etag verbatim into apply.base. Update supported tokens, headlines, layouts, notes and references with conflict checks. Cannot unlock components. Full output stays in project files; tool text is capped at 20KB.",
+  "apply 必填：逐字复制上一次 inspect 返回的 etag，64 位小写十六进制哈希。不是目录、路径或版本号。inspect/open 不传 base。": "Required for apply: copy the last inspect etag verbatim, a 64-character lowercase hexadecimal hash; not a directory, path or revision number. Omit base for inspect/open."
 }

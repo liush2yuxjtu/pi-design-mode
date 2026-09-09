@@ -44,7 +44,7 @@
     "start": "node extensions/html-studio/server.mjs",
     "check": "cd extensions/html-studio && node build.mjs",
     "test": "node --test extensions/html-studio/test/*.test.mjs",
-    "test:extension": "node tools/check-extension.mjs",
+    "test:extension": "node tools/check-extension.mjs && PI_DESIGN_LANGUAGE=en node tools/check-extension.mjs",
     "prepack": "npm run check && npm test && npm run test:extension"
   },
   "peerDependencies": {

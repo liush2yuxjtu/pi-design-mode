@@ -46,7 +46,7 @@ export default function designStudio(pi: ExtensionAPI) {
  }
  async function close() { epoch++; const old = app; app = undefined; if (old) await old.close(); }
  pi.registerCommand('design', {
-  description: '打开真实 HTML 设计工作区；/design reference|system|frontend <需求> 交给当前 Pi',
+  description: t('打开真实 HTML 设计工作区；/design reference|system|frontend <需求> 交给当前 Pi'),
   handler: async (args, ctx) => {
    context = ctx; await open(ctx); if (!app) throw new Error('设计服务未启动');
    pi.sendMessage({ customType: 'design-studio', content: `${t('设计工作区已启动：')}[${t('打开控制面板')}](${app.url})\n${t('项目：')}${app.store.root}\n${t('只有你点击“应用到项目”才写回草稿。不会自动打开浏览器。')}`,  display: true });
@@ -54,9 +54,9 @@ export default function designStudio(pi: ExtensionAPI) {
    const raw = args.trim(); if (raw) { const match = /^(reference|system|frontend|edit)\s*(.*)$/s.exec(raw); pi.sendUserMessage(instruction(match?.[1] || 'edit', match?.[2] || raw, app.store.root), { deliverAs: 'followUp' }); }
   }
  });
- pi.registerCommand('design-stop', { description: '关闭设计服务，保留所有真源与版本', handler: async (_args, ctx) => { await close(); if (ctx.hasUI) {ctx.ui.setWidget('design-studio', undefined);ctx.ui.setStatus('design-studio', undefined);} } });
- pi.registerTool({ name: 'design_workspace', label: t('设计工作区'), description: '打开或读取真实 HTML 设计工作区；先调用 {action:"inspect"}，再将结果 etag 原样放入 apply 的 base 参数，防冲突写入受支持的 token、标题、布局、说明、参考。不能解除锁。完整输出保留在项目文件，工具文本限 20KB。',
-  parameters: Type.Object({ action: StringEnum(['open', 'inspect', 'apply']), base: Type.Optional(Type.String({ description: 'apply 必填：逐字复制上一次 inspect 返回的 etag，64 位小写十六进制哈希。不是目录、路径或版本号。inspect/open 不传 base。', pattern: '^[a-f0-9]{64}$' })), patch: Type.Optional(Type.Object({ accent: Type.Optional(Type.String()), radius: Type.Optional(Type.Integer()), space: Type.Optional(Type.Integer()), headline: Type.Optional(Type.String()), variant: Type.Optional(StringEnum(['grid','list'])), theme: Type.Optional(StringEnum(['light','dark'])), design: Type.Optional(Type.String()), references: Type.Optional(Type.Array(Type.Object({ category: StringEnum(['design','system','screen','flow','template']), title: Type.String(), url: Type.String(), status: Type.String() }, { additionalProperties: false }))) }, { additionalProperties: false })) }, { additionalProperties: false }),
+ pi.registerCommand('design-stop', { description: t('关闭设计服务，保留所有真源与版本'), handler: async (_args, ctx) => { await close(); if (ctx.hasUI) {ctx.ui.setWidget('design-studio', undefined);ctx.ui.setStatus('design-studio', undefined);} } });
+ pi.registerTool({ name: 'design_workspace', label: t('设计工作区'), description: t('打开或读取真实 HTML 设计工作区；先调用 {action:"inspect"}，再将结果 etag 原样放入 apply 的 base 参数，防冲突写入受支持的 token、标题、布局、说明、参考。不能解除锁。完整输出保留在项目文件，工具文本限 20KB。'),
+  parameters: Type.Object({ action: StringEnum(['open', 'inspect', 'apply']), base: Type.Optional(Type.String({ description: t('apply 必填：逐字复制上一次 inspect 返回的 etag，64 位小写十六进制哈希。不是目录、路径或版本号。inspect/open 不传 base。'), pattern: '^[a-f0-9]{64}$' })), patch: Type.Optional(Type.Object({ accent: Type.Optional(Type.String()), radius: Type.Optional(Type.Integer()), space: Type.Optional(Type.Integer()), headline: Type.Optional(Type.String()), variant: Type.Optional(StringEnum(['grid','list'])), theme: Type.Optional(StringEnum(['light','dark'])), design: Type.Optional(Type.String()), references: Type.Optional(Type.Array(Type.Object({ category: StringEnum(['design','system','screen','flow','template']), title: Type.String(), url: Type.String(), status: Type.String() }, { additionalProperties: false }))) }, { additionalProperties: false })) }, { additionalProperties: false }),
   renderCall(args) {
    return { render: () => [t(`design_workspace · ${args.action || '准备中'}`)], invalidate() {} };
   },
