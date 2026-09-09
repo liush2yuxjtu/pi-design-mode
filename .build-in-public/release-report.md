@@ -1,5 +1,15 @@
 # Release report
 
+## 最新：0.3.0 英文实录与双语发行
+
+- [Release](https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.3.0) · [npm](https://www.npmjs.com/package/pi-design-mode/v/0.3.0) · [Gallery](https://pi.dev/packages/pi-design-mode)。
+- [英文视频](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4) 70.04 秒；[中文原片](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4) 62.708333 秒且哈希未变。
+- 官网随语言切换对应视频，Gallery 内置播放器实测播放英文视频。npm 安装包的双语 README 提供两版视频入口。
+- 18 项测试、中英两种官方 Pi loader、隔离 Pi 安装、公网视频播放/尺寸/时长/哈希均通过。部分诊断和工作流说明仍为中文，不声称完整多语言覆盖。
+- [OIDC 发布及校验](https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34348021790) 全部成功。细节见 [release-0.3.0.md](release-0.3.0.md)。
+
+以下保留历史发布记录。
+
 ## 0.2.0 已公开发布与安装验证
 
 - [GitHub Release](https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.2.0)：公开 tarball 下载与内容校验通过。

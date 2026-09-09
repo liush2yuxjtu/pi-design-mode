@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "license": "MIT",
+  "repository": "https://github.com/liush2yuxjtu/pi-design-mode",
+  "release": "https://github.com/liush2yuxjtu/pi-design-mode/releases/tag/v0.2.0",
+  "npm": "https://www.npmjs.com/package/pi-design-mode/v/0.2.0",
+  "gallery": "https://pi.dev/packages/pi-design-mode",
+  "channels": {
+    "github": "verified",
+    "npm": "verified-install",
+    "gallery": "verified-version"
+  },
+  "integrity": "sha512-BcJNno/3sIeDdMThEjoWIhs3uFfAEV1tViEpLnWSabcudzxQhPdYw6p033VkWDwEbyB85O5qBeumJazJTU57fQ==",
+  "provenance": {
+    "url": "https://registry.npmjs.org/-/npm/v1/attestations/pi-design-mode@0.2.0",
+    "provenance": {
+      "predicateType": "https://slsa.dev/provenance/v1"
+    }
+  },
+  "publishRun": "https://github.com/liush2yuxjtu/pi-design-mode/actions/runs/34331614299",
+  "publishRunCaveat": "publish succeeded; immediate registry lookup failed on temporary 404; later verified independently",
+  "verification": {
+    "backendTests": 14,
+    "browserRegressionTests": 3,
+    "officialPiInstall": true,
+    "officialLoader": true,
+    "githubNpmFilesIdentical": true,
+    "modelInvokedDuringInstallTest": false
+  },
+  "capturedAt": "2026-09-09T09:00:15.648699+00:00"
+}

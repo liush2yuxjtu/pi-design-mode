@@ -2,7 +2,7 @@
 
 ## 最新状态
 
-0.2.0 已通过 GitHub Actions OIDC 发布，GitHub/npm/Gallery 三处公开版本与干净安装已核验。用户已完成 npm Trusted Publisher 绑定；后续不依赖本机登录。详细证据见 release-report.md。以下准备阶段认证与批准描述属于历史状态，不是仍需用户处理的事项。
+0.3.0 已通过 GitHub Actions OIDC 发布。英文实录与中文获批原片均已公开；GitHub/npm/Gallery、双语官网播放与独立安装已核验。详见 release-0.3.0.md。用户已完成 npm Trusted Publisher 绑定；后续不依赖本机登录。详细证据见 release-report.md。以下准备阶段认证与批准描述属于历史状态，不是仍需用户处理的事项。
 
 ## Canonical artifact and version
 
