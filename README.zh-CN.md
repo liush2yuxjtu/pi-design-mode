@@ -6,7 +6,7 @@
 
 [观看视频](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [下载 MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
 
-视频展示真实本地编辑器的标题修改、tokens 调整、保存和导出交互。没有片头或字幕，不包含模型调用。隐私路径字段在录制中隐藏。
+视频使用此前确认的原版：左侧真实 Pi TUI，右侧 HTML。包含实际 design_workspace inspect/apply 模型工具调用、tokens 调整与导出 HTML 交互。没有片头或字幕，仅遮挡本机路径和 provider 信息。
 
 在 Pi 中用 `/design` 打开本地 HTML 设计工作区。编辑 tokens 和组件，保存版本，导出可独立交互的 HTML。
 
@@ -15,7 +15,7 @@
 需要 macOS、Node.js 22+ 和 Pi。扩展集成测试针对 Pi 0.85.1；其他版本尚未验证。
 
 ```bash
-pi install npm:pi-design-mode@0.2.1
+pi install npm:pi-design-mode@0.2.2
 ```
 
 在 Pi 中输入 `/reload`，然后输入 `/design`，点击返回的控制面板链接。不会自动弹出浏览器。

@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
