@@ -42,7 +42,7 @@ gh workflow run publish.yml --ref main -f tag=v0.2.0 -f publish=true
 
 真实发布后核对 npm registry 的版本、integrity、provenance 和干净安装。仅验证成功不证明 OIDC 信任配置正确。已发布版本不可重复发布，下一版需新版本号和标签。
 
-若发布成功但索引尚未刷新，不要重新发布。工作流对暂时的 404/429/5xx 最多查询 8 次；仍未就绪时可独立运行：
+若发布成功但索引尚未刷新，不要重新发布。工作流对元数据暂时的 404/429/5xx 最多查询 8 次；下载包若暂时 404，最多查询 3 次，合计上限 11 次网络尝试。其他下载错误直接失败。仍未就绪时可独立运行：
 
 ```bash
 gh workflow run publish.yml --ref main -f tag=v0.2.0 -f publish=false -f verify_only=true
