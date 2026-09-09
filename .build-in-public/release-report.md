@@ -1,5 +1,11 @@
 # Release report
 
+## 0.2.0 候选：尚未发布
+
+HTML 工作区、随包工作流、README、权限说明、CI 和 npm 包已经准备。14/14 测试、源码检查、官方 Pi loader 和一次干净 tarball 安装通过。公共元数据仍为 0.1.0。npm 当前凭据返回 E401，需要官方重新授权。首次 0.2.0 公开操作前确认现有 GitHub/npm/Gallery、MIT 和版本。原开发目录未提交工作保留。
+
+以下内容为 **0.1.0 历史发布记录**，不是 0.2.0 发布证明。
+
 ## Published and verified
 
 - GitHub repository: https://github.com/liush2yuxjtu/pi-design-mode

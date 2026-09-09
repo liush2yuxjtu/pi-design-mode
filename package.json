@@ -1,14 +1,14 @@
 {
   "name": "pi-design-mode",
-  "version": "0.1.0",
-  "description": "Brief-first SVG design exploration, revision, region protection, critique, and static multi-screen flows for Pi.",
+  "version": "0.2.0",
+  "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
     "pi-extension",
     "design",
-    "svg",
+    "html",
     "prototype",
-    "wireframe"
+    "design-tokens"
   ],
   "author": "liush2yuxjtu",
   "license": "MIT",
@@ -25,22 +25,24 @@
     "darwin"
   ],
   "engines": {
-    "node": ">=20.3"
+    "node": ">=22"
   },
   "files": [
-    "extensions/design-mode/index.ts",
-    "extensions/design-mode/core.ts",
-    "extensions/design-mode/svg.ts",
-    "extensions/design-mode/schema.ts",
-    "extensions/design-mode/examples.json",
-    "extensions/design-mode/USAGE.md",
-    "assets/flow.png",
-    "SECURITY.md"
+    "extensions/html-studio/extension.ts",
+    "extensions/html-studio/server.mjs",
+    "extensions/html-studio/store.mjs",
+    "extensions/html-studio/public",
+    "extensions/html-studio/seed",
+    "extensions/html-studio/WORKFLOW.md",
+    "SECURITY.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
-    "check": "cd extensions/design-mode && node check.mjs",
-    "test": "cd extensions/design-mode && node --test test.mjs",
-    "prepack": "npm run check && npm test"
+    "start": "node extensions/html-studio/server.mjs",
+    "check": "cd extensions/html-studio && node build.mjs",
+    "test": "node --test extensions/html-studio/test/*.test.mjs",
+    "test:extension": "node tools/check-extension.mjs",
+    "prepack": "npm run check && npm test && npm run test:extension"
   },
   "peerDependencies": {
     "@earendil-works/pi-ai": "*",
@@ -53,9 +55,7 @@
   },
   "pi": {
     "extensions": [
-      "./extensions/design-mode/index.ts"
-    ],
-    "video": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/pi-design-mode-product-demo.mp4",
-    "image": "https://raw.githubusercontent.com/liush2yuxjtu/pi-design-mode/main/assets/flow.png"
+      "./extensions/html-studio/extension.ts"
+    ]
   }
 }

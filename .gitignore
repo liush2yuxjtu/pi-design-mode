@@ -1,5 +1,9 @@
-node_modules/
+node_modules
 *.tgz
 .design-test-*/
 .design-typecheck-*/
 .DS_Store
+artifacts/
+**/artifacts/
+.pi-design/
+.build-in-public/evidence/
