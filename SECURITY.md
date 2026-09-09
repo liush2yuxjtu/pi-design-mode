@@ -1,19 +1,23 @@
-# Security
+# 安全与隐私
 
-## Supported version
+本包是 Pi 扩展，执行权限等同当前用户。文件允许列表和浏览器隔离不构成操作系统沙箱。
 
-Only latest published version receives security fixes.
+## 网络
 
-## Reporting
+服务仅绑定 127.0.0.1，端口动态分配。授权令牌随机生成，位于控制面板 URL fragment 和浏览器内存。API 通过自定义请求头验证令牌，写操作要求同源 JSON；检查 Host 和 Origin。不要公开授权 URL，不要建立公网隧道。Pi 会话记录可能保存控制面板链接，请勿直接公开原始会话。
 
-Do not open public issue for suspected vulnerability. Use GitHub private vulnerability reporting on this repository.
+预览 iframe 不启用 same-origin；CSP 限制外部网络和导航。主页面仅加载包内静态资源。参考链接由用户主动打开，第三方网站使用自己的隐私政策。
 
-Include affected version, reproduction steps, impact, and smallest safe proof.
+## 磁盘
 
-## Trust boundaries
+受管文件使用固定允许列表，拒绝符号链接路径。跨进程 writer lock、etag 比较、版本快照和事务恢复减少误覆盖。无法阻止同用户恶意进程绕过本扩展直接改盘。
 
-Pi extensions execute with current user's permissions. Review package source before installation.
+进程异常退出后，遗留 .writer.lock 会拒绝第二个写进程。恢复前先检查记录的 PID、路径与实际进程归属；不要直接删除仍在使用的锁。交易日志恢复与标题锁不等同恶意用户隔离。
 
-Pi Design Mode restricts SVG syntax and external resource loading, validates XML offline, hashes saved SVG artifacts, rejects path traversal and symbolic-link storage roots, and requires UI confirmation before changing protected-region status.
+模型只能通过工具更新其支持的字段，不能通过此工具解锁标题。用户可在浏览器显式解除锁定。设计版本独立于 Pi 会话树；切换会话树不会自动回滚设计文件。
 
-Region protection is workflow integrity, not operating-system isolation. Other processes running as same user can modify files. Hash mismatches stop further editing rather than silently trusting changed artifacts.
+## 数据与遥测
+
+本包无自定义遥测，无分析服务。示例数据为虚构数据。模型请求使用现有 Pi provider，遵循其隐私与费用政策。不自动部署、不启动子代理、不自动更改 provider。
+
+不要在公开 Issue 中附上令牌、工作区完整 URL、私有设计、会话原文或含敏感信息的录屏。可通过 GitHub 仓库的私密漏洞报告入口报告问题；若入口不可用，请先在 Issue 中请求私密联系渠道，不公开漏洞利用细节或凭据。
