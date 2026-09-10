@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
@@ -60,7 +60,6 @@
     "extensions": [
       "./extensions/html-studio/extension.ts"
     ],
-    "video": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4",
-    "image": "https://liush2yuxjtu.github.io/pi-design-mode/poster-en.png"
+    "image": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif"
   }
 }

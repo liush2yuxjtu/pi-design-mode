@@ -2,7 +2,15 @@
 
 [English](README.md) · **简体中文** · [官网与演示](https://liush2yuxjtu.github.io/pi-design-mode/)
 
-[![真实 UI 操作演示](https://liush2yuxjtu.github.io/pi-design-mode/poster.png)](https://liush2yuxjtu.github.io/pi-design-mode/?lang=zh#demo)
+### 中文 · 内嵌演示
+
+![中文：真实 Pi TUI 与 HTML，完整动态演示](https://liush2yuxjtu.github.io/pi-design-mode/demo.gif)
+
+### English · inline demo
+
+![English: real Pi TUI and HTML, full-length animated demo](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif)
+
+两版 GIF 直接在正文播放，无需跳转。为控制体积降至 960px、8 fps；下方保留原始高清 MP4。
 
 [观看中文原片](https://liush2yuxjtu.github.io/pi-design-mode/?lang=zh#demo) · [中文 MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4) · [English MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4)
 
@@ -15,7 +23,7 @@
 需要 macOS、Node.js 22+ 和 Pi。扩展集成测试针对 Pi 0.85.1；其他版本尚未验证。
 
 ```bash
-pi install npm:pi-design-mode@0.3.0
+pi install npm:pi-design-mode@0.3.1
 ```
 
 在 Pi 中输入 `/reload`，然后输入 `/design`，点击返回的控制面板链接。不会自动弹出浏览器。
@@ -115,7 +123,7 @@ npm run test:extension
 npm pack --dry-run
 ```
 
-测试覆盖磁盘版本、并发冲突、标题锁、符号链接、事务恢复、HTTP 授权、导出，以及官方 Pi loader、命令、工具和会话生命周期。集成测试不调用模型。
+测试覆盖磁盘版本、并发冲突、标题锁、符号链接、事务恢复、HTTP 授权、导出，以及官方 Pi loader、命令、工具和会话生命周期。集成测试不调用模型。GIF 浏览器回归需要 Pillow 与 Playwright；固定版本依赖和独立环境安装步骤见[媒体验证](https://github.com/liush2yuxjtu/pi-design-mode/blob/main/site/MEDIA.md)。
 
 ## 支持与许可证
 

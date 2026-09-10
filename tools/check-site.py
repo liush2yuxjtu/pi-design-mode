@@ -20,7 +20,8 @@ try:
   response=page.goto(url);assert response.status==200
   expect(page.locator('html')).to_have_attribute('lang','en')
   page.locator('#copy').click();expect(page.locator('#copy-status')).to_have_text('Copied')
-  assert page.evaluate('navigator.clipboard.readText()')=='pi install npm:pi-design-mode@0.3.0'
+  assert page.evaluate('navigator.clipboard.readText()')=='pi install npm:pi-design-mode@0.3.1'
+  page.locator('#hd-video summary').click()
   for language in ['en','zh','en']:
    if page.locator('html').get_attribute('lang')!=('en' if language=='en' else 'zh-CN'):page.locator('#language').click()
    video=page.locator('video');video.scroll_into_view_if_needed()
