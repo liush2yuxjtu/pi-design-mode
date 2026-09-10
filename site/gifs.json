@@ -1,0 +1,14 @@
+{
+  "demo-en.gif": {
+    "frames": 560,
+    "duration": 70.01,
+    "bytes": 3743636,
+    "sha256": "71b41627f8b3d75056c477f7e86b74b4f05f7a28d084acde03c10fa96ad0409b"
+  },
+  "demo.gif": {
+    "frames": 502,
+    "duration": 62.76,
+    "bytes": 3544997,
+    "sha256": "58ee73728f723370696240546537ca5c1c70717339cde265f1d60cd328f95616"
+  }
+}

@@ -4,7 +4,15 @@
 
 A local HTML design workspace inside Pi. Edit tokens and components, keep revisions, and export interactive HTML.
 
-[![Real UI walkthrough](https://liush2yuxjtu.github.io/pi-design-mode/poster-en.png)](https://liush2yuxjtu.github.io/pi-design-mode/#demo)
+### English · inline demo
+
+![English: real Pi TUI and HTML, full-length animated demo](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif)
+
+### 中文 · 内嵌演示
+
+![中文：真实 Pi TUI 与 HTML，完整动态演示](https://liush2yuxjtu.github.io/pi-design-mode/demo.gif)
+
+Both GIFs animate inline without opening another page. Reduced to 960px / 8 fps for size; the original full-resolution MP4 recordings remain below.
 
 [Watch in English](https://liush2yuxjtu.github.io/pi-design-mode/#demo) · [English MP4](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.mp4) · [中文视频](https://liush2yuxjtu.github.io/pi-design-mode/demo.mp4)
 
@@ -15,7 +23,7 @@ Two real recordings: the new 70-second English demo and the unchanged, approved 
 Requires macOS, Node.js 22+, and Pi. Integration tests target Pi 0.85.1; other versions are not verified.
 
 ```bash
-pi install npm:pi-design-mode@0.3.0
+pi install npm:pi-design-mode@0.3.1
 ```
 
 For the English interface, start Pi from your project directory with:

@@ -12,5 +12,5 @@ function renderLanguage(){
  document.getElementById('copy-status').textContent='';
 }
 toggle.addEventListener('click',()=>{language=language==='en'?'zh':'en';const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);renderLanguage();});
-document.getElementById('copy').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText('pi install npm:pi-design-mode@0.3.0');status.textContent=language==='en'?'Copied':'已复制';}catch{status.textContent=language==='en'?'Select and copy the command above.':'请选中上方命令复制。';}});
+document.getElementById('copy').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText('pi install npm:pi-design-mode@0.3.1');status.textContent=language==='en'?'Copied':'已复制';}catch{status.textContent=language==='en'?'Select and copy the command above.':'请选中上方命令复制。';}});
 renderLanguage();
