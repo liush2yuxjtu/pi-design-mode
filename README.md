@@ -121,7 +121,7 @@ npm run test:extension
 npm pack --dry-run
 ```
 
-Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` (editor) and `tools/check-site.py` (landing page), with an external Playwright Python installation.
+Tests cover revisions, conflicts, headline locks, symlinks, transaction recovery, HTTP authorization, exports, and the official Pi loader and session lifecycle. Integration tests do not invoke a model. Browser regression checks are available in `tools/check-ui.py` (editor) and `tools/check-site.py` (landing page), with an external Playwright Python installation. The inline GIF check also needs Pillow; pinned dependencies and isolated-environment setup are documented in [media verification](https://github.com/liush2yuxjtu/pi-design-mode/blob/main/site/MEDIA.md).
 
 The website is static HTML/CSS/JS in `site/`. The earlier UI-only recording harness is in `tools/demo-video/`; it is not the source of either selected TUI video. The Chinese video reuses the approved original; the English video is a new real TUI session using the shipped English locale. Both were recorded and privacy-processed on the maintainer's Mac mini. Media is not included in the npm runtime tarball.
 

@@ -123,7 +123,7 @@ npm run test:extension
 npm pack --dry-run
 ```
 
-测试覆盖磁盘版本、并发冲突、标题锁、符号链接、事务恢复、HTTP 授权、导出，以及官方 Pi loader、命令、工具和会话生命周期。集成测试不调用模型。
+测试覆盖磁盘版本、并发冲突、标题锁、符号链接、事务恢复、HTTP 授权、导出，以及官方 Pi loader、命令、工具和会话生命周期。集成测试不调用模型。GIF 浏览器回归需要 Pillow 与 Playwright；固定版本依赖和独立环境安装步骤见[媒体验证](https://github.com/liush2yuxjtu/pi-design-mode/blob/main/site/MEDIA.md)。
 
 ## 支持与许可证
 

@@ -22,7 +22,10 @@ def check_readmes(read):
 
 
 if '--baseline' in sys.argv:
-    check_readmes(lambda name: subprocess.check_output(['git', 'show', f'HEAD:{name}'], cwd=ROOT, text=True))
+    if len(sys.argv) != 3 or sys.argv[1] != '--baseline':
+        raise SystemExit('Usage: check-inline-gifs.py --baseline <git-ref>')
+    revision = subprocess.check_output(['git', 'rev-parse', '--verify', '--end-of-options', sys.argv[2] + '^{commit}'], cwd=ROOT, text=True).strip()
+    check_readmes(lambda name: subprocess.check_output(['git', 'show', f'{revision}:{name}'], cwd=ROOT, text=True))
     raise SystemExit('Baseline unexpectedly passed')
 
 check_readmes(lambda name: (ROOT / name).read_text())

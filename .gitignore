@@ -1,4 +1,5 @@
 node_modules
+.venv-media/
 *.tgz
 .design-test-*/
 .design-typecheck-*/

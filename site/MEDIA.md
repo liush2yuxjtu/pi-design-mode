@@ -14,7 +14,16 @@
 
 双语 README 直接使用 Markdown 图片，不包外链。官网直接显示两张 GIF；系统开启减少动态效果时显示静态封面，高清播放器仍可手动使用。Gallery 元数据只提供 GIF `pi.image`，不再提供会触发弹窗的 `pi.video`。Gallery 自己仍可能允许点击图片放大，但正文动画无需点击。
 
-回归验证：`python3 tools/check-inline-gifs.py`；线上验证可传入官网或 Gallery URL。渲染脚本为 `tools/render-gifs.sh`，必须通过维护者的 Mac mini 渲染入口执行。两张 GIF 不打包进 npm 运行时。
+回归验证依赖 Python 3.10+、Pillow 和 Playwright。首次在独立环境安装：
+
+```bash
+python3 -m venv .venv-media
+.venv-media/bin/python -m pip install -r tools/requirements-media.txt
+.venv-media/bin/python -m playwright install chromium
+.venv-media/bin/python tools/check-inline-gifs.py
+```
+
+线上验证可传入官网或 Gallery URL。旧版本对照：`.venv-media/bin/python tools/check-inline-gifs.py --baseline v0.3.0`，预期断言失败，证明旧 README 缺少直接 GIF。渲染脚本为 `tools/render-gifs.sh`，必须通过维护者的 Mac mini 渲染入口执行。两张 GIF 不打包进 npm 运行时。
 
 ## 共同边界
 
