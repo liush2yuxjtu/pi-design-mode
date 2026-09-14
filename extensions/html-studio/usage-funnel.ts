@@ -5,12 +5,14 @@ import { dirname, join } from 'node:path';
 
 type State = { schema: 1; id: string; lastDay: string; firstSuccess: boolean; returned: boolean; week: string | null };
 type EventName = 'first_install' | 'first_launch' | 'first_success' | 'returning_user' | 'weekly_active';
-function truthy(name: string): boolean { const value = process.env[name]?.trim().toLowerCase(); return value === '1' || value === 'true' || value === 'yes'; }
+const CI_KEYS = ['CI', 'GITHUB_ACTIONS', 'GITLAB_CI', 'TF_BUILD', 'JENKINS_URL', 'TEAMCITY_VERSION', 'BUILDKITE', 'CIRCLECI', 'TRAVIS', 'BITBUCKET_BUILD_NUMBER', 'BUILD_ID'];
+function truthy(name: string): boolean { const value = process.env[name]?.trim().toLowerCase(); return !!value && value !== '0' && value !== 'false' && value !== 'no'; }
+function isCI(): boolean { return CI_KEYS.some(truthy); }
 function day(now: number) { return new Date(now).toISOString().slice(0, 10); }
 function week(now: number) { const d = new Date(now); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return d.toISOString().slice(0, 10); }
 function enabled(): URL | undefined {
  if (!truthy('PI_USAGE_TELEMETRY') || !truthy('PI_USAGE_TELEMETRY_PRIVACY_ACK')) return;
- if (truthy('DO_NOT_TRACK') || truthy('PI_TELEMETRY_DISABLED') || truthy('CI') || truthy('GITHUB_ACTIONS')) return;
+ if (truthy('DO_NOT_TRACK') || truthy('PI_TELEMETRY_DISABLED') || isCI()) return;
  try { const url = new URL(process.env.PI_USAGE_TELEMETRY_ENDPOINT || ''); return url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash ? url : undefined; } catch { return; }
 }
 function stateFile(packageName: string) { const root = process.platform === 'win32' ? (process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local')) : (process.env.XDG_CONFIG_HOME || join(homedir(), '.config')); return join(root, 'liushiyu-usage-funnel', `${createHash('sha256').update(packageName).digest('hex')}.json`); }
