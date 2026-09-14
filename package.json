@@ -29,6 +29,8 @@
   },
   "files": [
     "extensions/html-studio/extension.ts",
+    "extensions/html-studio/usage-entry.ts",
+    "extensions/html-studio/usage-funnel.ts",
     "extensions/html-studio/server.mjs",
     "extensions/html-studio/store.mjs",
     "extensions/html-studio/public",
@@ -58,7 +60,7 @@
   },
   "pi": {
     "extensions": [
-      "./extensions/html-studio/extension.ts"
+      "./extensions/html-studio/usage-entry.ts"
     ],
     "image": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif"
   }
