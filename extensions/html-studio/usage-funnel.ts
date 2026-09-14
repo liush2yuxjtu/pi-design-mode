@@ -5,11 +5,7 @@ import { dirname, join } from 'node:path';
 
 type State = { schema: 1; id: string; lastDay: string; firstSuccess: boolean; returned: boolean; week: string | null };
 type EventName = 'first_install' | 'first_launch' | 'first_success' | 'returning_user' | 'weekly_active';
-
-function truthy(name: string): boolean {
- const value = process.env[name]?.trim().toLowerCase();
- return value === '1' || value === 'true' || value === 'yes';
-}
+function truthy(name: string): boolean { const value = process.env[name]?.trim().toLowerCase(); return value === '1' || value === 'true' || value === 'yes'; }
 function day(now: number) { return new Date(now).toISOString().slice(0, 10); }
 function week(now: number) { const d = new Date(now); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return d.toISOString().slice(0, 10); }
 function enabled(): URL | undefined {
@@ -17,14 +13,9 @@ function enabled(): URL | undefined {
  if (truthy('DO_NOT_TRACK') || truthy('PI_TELEMETRY_DISABLED') || truthy('CI') || truthy('GITHUB_ACTIONS')) return;
  try { const url = new URL(process.env.PI_USAGE_TELEMETRY_ENDPOINT || ''); return url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash ? url : undefined; } catch { return; }
 }
-function stateFile(packageName: string) {
- const root = process.platform === 'win32' ? (process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local')) : (process.env.XDG_CONFIG_HOME || join(homedir(), '.config'));
- return join(root, 'liushiyu-usage-funnel', `${createHash('sha256').update(packageName).digest('hex')}.json`);
-}
+function stateFile(packageName: string) { const root = process.platform === 'win32' ? (process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local')) : (process.env.XDG_CONFIG_HOME || join(homedir(), '.config')); return join(root, 'liushiyu-usage-funnel', `${createHash('sha256').update(packageName).digest('hex')}.json`); }
 async function send(endpoint: URL, event: EventName, state: State, packageName: string, version: string) {
- try {
-  await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(500), body: JSON.stringify({ schema_version: 1, event, event_id: randomUUID(), anonymous_install_id: state.id, package: packageName, version, timestamp: new Date().toISOString(), os: process.platform, node_major: Number(process.versions.node.split('.')[0]), ci: false }) });
- } catch { /* at-most-once telemetry: no retries or offline spool */ }
+ try { await fetch(endpoint, { method: 'POST', redirect: 'error', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(500), body: JSON.stringify({ schema_version: 1, event, event_id: randomUUID(), anonymous_install_id: state.id, package: packageName, version, timestamp: new Date().toISOString(), os: process.platform, node_major: Number(process.versions.node.split('.')[0]), ci: false }) }); } catch { /* at-most-once telemetry: no retries or offline spool */ }
 }
 export function createUsageFunnel(packageName: string, version: string) {
  let queue = Promise.resolve();
