@@ -24,23 +24,42 @@ function stateFile(packageName: string) {
 async function send(endpoint: URL, event: EventName, state: State, packageName: string, version: string) {
  try {
   await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(500), body: JSON.stringify({ schema_version: 1, event, event_id: randomUUID(), anonymous_install_id: state.id, package: packageName, version, timestamp: new Date().toISOString(), os: process.platform, node_major: Number(process.versions.node.split('.')[0]), ci: false }) });
- } catch { /* telemetry must never affect product behavior */ }
+ } catch { /* at-most-once telemetry: no retries or offline spool */ }
 }
 export function createUsageFunnel(packageName: string, version: string) {
+ let queue = Promise.resolve();
  async function record(success: boolean) {
   const endpoint = enabled(); if (!endpoint) return;
-  const file = stateFile(packageName), now = Date.now(), today = day(now), currentWeek = week(now);
-  let state: State | undefined;
-  try { state = JSON.parse(await readFile(file, 'utf8')) as State; } catch { state = undefined; }
+  const file = stateFile(packageName), lock = `${file}.lock`;
+  let locked = false, temporary: string | undefined, state: State | undefined;
   const events: EventName[] = [];
-  if (!state || state.schema !== 1 || typeof state.id !== 'string') { state = { schema: 1, id: randomUUID(), lastDay: today, firstSuccess: false, returned: false, week: null }; events.push('first_install', 'first_launch'); }
-  else if (!state.returned && state.lastDay < today) { state.returned = true; events.push('returning_user'); }
-  state.lastDay = today;
-  if (state.week !== currentWeek) { state.week = currentWeek; events.push('weekly_active'); }
-  if (success && !state.firstSuccess) { state.firstSuccess = true; events.push('first_success'); }
-  let temporary: string | undefined;
-  try { await mkdir(dirname(file), { recursive: true, mode: 0o700 }); temporary = `${file}.${randomUUID()}.tmp`; await writeFile(temporary, JSON.stringify(state), { mode: 0o600, flag: 'wx' }); await rename(temporary, file); temporary = undefined; await Promise.all(events.map((event) => send(endpoint, event, state!, packageName, version))); }
-  catch { if (temporary) await rm(temporary, { force: true }).catch(() => undefined); }
+  try {
+   await mkdir(dirname(file), { recursive: true, mode: 0o700 });
+   await mkdir(lock, { mode: 0o700 });
+   locked = true;
+   try {
+    state = JSON.parse(await readFile(file, 'utf8')) as State;
+    if (!state || state.schema !== 1 || typeof state.id !== 'string' || typeof state.lastDay !== 'string' || typeof state.firstSuccess !== 'boolean' || typeof state.returned !== 'boolean') return;
+   } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') return;
+   }
+   const now = Date.now(), today = day(now), currentWeek = week(now);
+   if (!state) { state = { schema: 1, id: randomUUID(), lastDay: today, firstSuccess: false, returned: false, week: null }; events.push('first_install', 'first_launch'); }
+   else if (!state.returned && state.lastDay < today) { state.returned = true; events.push('returning_user'); }
+   state.lastDay = today;
+   if (state.week !== currentWeek) { state.week = currentWeek; events.push('weekly_active'); }
+   if (success && !state.firstSuccess) { state.firstSuccess = true; events.push('first_success'); }
+   temporary = `${file}.${randomUUID()}.tmp`;
+   await writeFile(temporary, JSON.stringify(state), { mode: 0o600, flag: 'wx' });
+   await rename(temporary, file);
+   temporary = undefined;
+  } catch { return; }
+  finally {
+   if (temporary) await rm(temporary, { force: true }).catch(() => undefined);
+   if (locked) await rm(lock, { recursive: true, force: true }).catch(() => undefined);
+  }
+  if (state) await Promise.all(events.map((event) => send(endpoint, event, state!, packageName, version)));
  }
- return { launch: () => record(false), success: () => record(true) };
+ const enqueue = (success: boolean) => { queue = queue.then(() => record(success)).catch(() => undefined); return queue; };
+ return { launch: () => enqueue(false), success: () => enqueue(true) };
 }
