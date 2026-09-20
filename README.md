@@ -2,7 +2,7 @@
 
 **English** · [简体中文](README.zh-CN.md) · [Website & demo](https://liush2yuxjtu.github.io/pi-design-mode/)
 
-A local HTML design workspace inside Pi. Edit tokens and components, keep revisions, and export interactive HTML.
+A local UI design and HTML prototyping workspace for the Pi coding agent. Edit design tokens and components, keep revisions, and export interactive HTML prototypes.
 
 ### English · inline demo
 

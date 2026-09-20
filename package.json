@@ -1,14 +1,20 @@
 {
   "name": "pi-design-mode",
   "version": "0.3.4",
-  "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
+  "description": "Local UI design workspace for the Pi coding agent: edit design tokens and components, keep revisions, and export interactive HTML prototypes.",
   "keywords": [
     "pi-package",
     "pi-extension",
-    "design",
-    "html",
-    "prototype",
-    "design-tokens"
+    "pi coding agent",
+    "ui design",
+    "frontend design",
+    "html prototype",
+    "interactive prototype",
+    "design system",
+    "design tokens",
+    "component design",
+    "local-first",
+    "prototyping"
   ],
   "author": "liush2yuxjtu",
   "license": "MIT",
