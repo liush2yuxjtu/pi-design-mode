@@ -63,10 +63,10 @@ test('debug inspection exposes intended design funnel without sending or consumi
   const dir = await mkdtemp(join(tmpdir(), 'design-telemetry-wire-'));
   t.after(() => rm(dir, { recursive: true, force: true }));
 
-  const previousDebug = process.env.PI_TELEMETRY_DEBUG;
-  const previousCI = process.env.CI;
+  const envKeys = ['PI_TELEMETRY_DEBUG', 'CI', 'GITHUB_ACTIONS', 'GITLAB_CI', 'TF_BUILD', 'JENKINS_URL', 'BUILD_ID'] as const;
+  const previousEnv = Object.fromEntries(envKeys.map(key => [key, process.env[key]]));
   process.env.PI_TELEMETRY_DEBUG = '1';
-  process.env.CI = '0';
+  for (const key of ['CI', 'GITHUB_ACTIONS', 'GITLAB_CI', 'TF_BUILD', 'JENKINS_URL', 'BUILD_ID']) process.env[key] = '0';
 
   const lines: string[] = [];
   const originalWrite = process.stderr.write.bind(process.stderr);
@@ -87,10 +87,11 @@ test('debug inspection exposes intended design funnel without sending or consumi
     await funnel.flush();
   } finally {
     process.stderr.write = originalWrite as typeof process.stderr.write;
-    if (previousDebug === undefined) delete process.env.PI_TELEMETRY_DEBUG;
-    else process.env.PI_TELEMETRY_DEBUG = previousDebug;
-    if (previousCI === undefined) delete process.env.CI;
-    else process.env.CI = previousCI;
+    for (const key of envKeys) {
+      const previous = previousEnv[key];
+      if (previous === undefined) delete process.env[key];
+      else process.env[key] = previous;
+    }
   }
 
   const payloads = lines.map(line => JSON.parse(line.slice('[telemetry:debug] '.length)));
