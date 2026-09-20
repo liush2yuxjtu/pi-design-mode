@@ -1,0 +1,17 @@
+name: Verify published 0.3.4 telemetry
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.head_ref == 'verify/published-telemetry-0.3.4'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - run: node scripts/verify-published-telemetry-0.3.4.mjs
