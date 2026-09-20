@@ -1,5 +1,7 @@
 name: Publish to npm
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       tag:
@@ -27,27 +29,52 @@ jobs:
     runs-on: macos-latest
     environment: npm
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          persist-credentials: false
-      - name: 验证发布标签
-        env:
-          RELEASE_TAG: ${{ inputs.tag }}
-        run: |
-          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
-          git rev-parse --verify "refs/tags/$RELEASE_TAG^{commit}"
-          git merge-base --is-ancestor "refs/tags/$RELEASE_TAG" HEAD
-          git checkout --detach "refs/tags/$RELEASE_TAG"
-          test "v$(node -p 'require("./package.json").version')" = "$RELEASE_TAG"
+          persist-credentials: true
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
+      - name: Resolve verified release
+        id: release
+        env:
+          MANUAL_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            VERSION="$(node -p 'require("./package.json").version')"
+            test "$VERSION" = "0.3.4"
+            RELEASE_TAG="v$VERSION"
+            RELEASE_SHA="$GITHUB_SHA"
+            if npm view "pi-design-mode@$VERSION" version --registry=https://registry.npmjs.org/ >/dev/null 2>&1; then
+              ALREADY_PUBLISHED=true
+            else
+              ALREADY_PUBLISHED=false
+            fi
+            if git rev-parse --verify "refs/tags/$RELEASE_TAG^{commit}" >/dev/null 2>&1; then
+              test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$RELEASE_SHA"
+            else
+              git tag "$RELEASE_TAG" "$RELEASE_SHA"
+              git push origin "refs/tags/$RELEASE_TAG"
+            fi
+          else
+            RELEASE_TAG="$MANUAL_TAG"
+            [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+            RELEASE_SHA="$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")"
+            git merge-base --is-ancestor "$RELEASE_SHA" HEAD
+            ALREADY_PUBLISHED=false
+          fi
+          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "sha=$RELEASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "already_published=$ALREADY_PUBLISHED" >> "$GITHUB_OUTPUT"
+          git checkout --detach "$RELEASE_SHA"
+          test "v$(node -p 'require("./package.json").version')" = "$RELEASE_TAG"
       - name: 验证 npm OIDC 支持
         run: |
           node --version
@@ -57,13 +84,13 @@ jobs:
       - name: 校验与打包
         run: npm pack
       - name: 仅验证发布包
-        if: ${{ !inputs.publish && !inputs.verify_only }}
+        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.publish && !inputs.verify_only }}
         run: npm publish "pi-design-mode-$(node -p 'require("./package.json").version').tgz" --dry-run --access public
       - name: 使用 OIDC 发布，无长期 Token
-        if: ${{ inputs.publish && !inputs.verify_only }}
+        if: ${{ (github.event_name == 'push' && steps.release.outputs.already_published != 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish && !inputs.verify_only) }}
         run: npm publish "pi-design-mode-$(node -p 'require("./package.json").version').tgz" --access public --provenance
       - name: 核验公开版本
-        if: ${{ inputs.publish || inputs.verify_only }}
+        if: ${{ github.event_name == 'push' || inputs.publish || inputs.verify_only }}
         run: |
           node --input-type=module <<'JS'
           import fs from 'node:fs';
