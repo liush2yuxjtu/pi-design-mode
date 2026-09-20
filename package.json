@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
@@ -65,6 +65,6 @@
     "image": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif"
   },
   "dependencies": {
-    "@nyn5255/telemetry": "^0.1.1"
+    "@nyn5255/telemetry": "^0.1.3"
   }
 }
