@@ -4,6 +4,10 @@
 
 A local UI design and HTML prototyping workspace for the Pi coding agent. Edit design tokens and components, keep revisions, and export interactive HTML prototypes.
 
+## Try this first
+
+After installing, ask Pi naturally: “Design a denser settings page and keep the result in the design workspace.” Pi can discover the design_workspace tool directly; /design remains the explicit control-panel command.
+
 ### English · inline demo
 
 ![English: real Pi TUI and HTML, full-length animated demo](https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif)
