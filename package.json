@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Pi 的本地 HTML 设计工作区：组件、tokens、版本历史和交互原型导出。",
   "keywords": [
     "pi-package",
@@ -45,8 +45,8 @@
   "scripts": {
     "start": "node extensions/html-studio/server.mjs",
     "check": "cd extensions/html-studio && node build.mjs",
-    "test": "node --test extensions/html-studio/test/*.test.mjs",
-    "test:extension": "node tools/check-extension.mjs && PI_DESIGN_LANGUAGE=en node tools/check-extension.mjs",
+    "test": "node --experimental-strip-types --test extensions/html-studio/test/*.test.mjs extensions/html-studio/test/*.test.ts",
+    "test:extension": "DESIGN_EXTENSION_PATH=extensions/html-studio/usage-entry.ts node tools/check-extension.mjs && PI_DESIGN_LANGUAGE=en DESIGN_EXTENSION_PATH=extensions/html-studio/usage-entry.ts node tools/check-extension.mjs",
     "prepack": "npm run check && npm test && npm run test:extension"
   },
   "peerDependencies": {
@@ -65,6 +65,6 @@
     "image": "https://liush2yuxjtu.github.io/pi-design-mode/demo-en.gif"
   },
   "dependencies": {
-    "@nyn5255/telemetry": "^0.1.1"
+    "@nyn5255/telemetry": "^0.1.3"
   }
 }

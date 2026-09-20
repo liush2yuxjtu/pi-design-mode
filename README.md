@@ -23,7 +23,7 @@ Two real recordings: the new 70-second English demo and the unchanged, approved 
 Requires macOS, Node.js 22+, and Pi. Integration tests target Pi 0.85.1; other versions are not verified.
 
 ```bash
-pi install npm:pi-design-mode@0.3.1
+pi install npm:pi-design-mode@0.3.4
 ```
 
 For the English interface, start Pi from your project directory with:
@@ -80,6 +80,7 @@ Project files live in `.pi-design/`. When started from the user's home directory
 /design reference Find references for this project
 /design system Audit the current tokens and components
 /design frontend Turn the approved design into a runnable frontend
+/design-telemetry status|on|off
 /design-stop
 ```
 
@@ -99,7 +100,7 @@ Requests go to the current model. The extension does not bundle a search service
 
 Pi extensions run with the operating-system user's permissions. This is not an OS sandbox. The workspace binds only to `127.0.0.1`; APIs use a random capability token and Host/Origin checks. Preview iframes use sandbox and CSP restrictions.
 
-No custom telemetry or usage analytics. Model requests use your existing Pi provider and its privacy and billing policies. Do not share capability links or expose the server publicly. See [SECURITY.md](SECURITY.md).
+Optional anonymous usage telemetry is **off by default**. Enable it only with `/design-telemetry on`; the interactive confirmation shows the collector address, exact field list, what is never sent, the 180-day retention window, and the purpose before anything is enabled. The funnel records install after consent, activation/weekly activity when `/design` is actually used, and first success only after a successful `design_workspace apply`. Disable immediately with `/design-telemetry off`, `DO_NOT_TRACK=1`, or `PI_TELEMETRY_DISABLED=1`. `PI_TELEMETRY_DEBUG=1` prints the exact payload without sending it or consuming telemetry state. No prompts, design contents, source files, paths, repository names, credentials, identity fields, or IP addresses are collected by the package. The collector is `https://telemetry-peach.vercel.app/api/events`; its hosting platform may retain short-lived technical request logs outside this package. Model requests still use your existing Pi provider and its privacy and billing policies. Do not share capability links or expose the workspace server publicly. See [SECURITY.md](SECURITY.md).
 
 ## Uninstall
 

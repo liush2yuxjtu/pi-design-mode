@@ -23,7 +23,7 @@
 需要 macOS、Node.js 22+ 和 Pi。扩展集成测试针对 Pi 0.85.1；其他版本尚未验证。
 
 ```bash
-pi install npm:pi-design-mode@0.3.1
+pi install npm:pi-design-mode@0.3.4
 ```
 
 在 Pi 中输入 `/reload`，然后输入 `/design`，点击返回的控制面板链接。不会自动弹出浏览器。
@@ -84,6 +84,7 @@ PI_DESIGN_LANGUAGE=en pi
 /design reference 查找适合当前项目的参考
 /design system 审计当前 tokens 与组件
 /design frontend 将批准的设计做成可运行前端
+/design-telemetry status|on|off
 /design-stop
 ```
 
@@ -103,7 +104,7 @@ PI_DESIGN_LANGUAGE=en pi
 
 扩展在 Pi 进程中运行，具有同一操作系统用户的权限，不是操作系统沙箱。工作区服务只监听 `127.0.0.1`，API 使用随机授权令牌及 Host/Origin 检查。预览 iframe 受 sandbox/CSP 限制。
 
-不包含自定义遥测。不收集使用统计。模型调用由用户现有 Pi provider 执行，相应请求受该 provider 的隐私和费用政策约束。勿分享授权链接或将服务暴露到公网。详见 [SECURITY.md](SECURITY.md)。
+可选匿名使用遥测**默认关闭**。只有执行 `/design-telemetry on` 并在交互确认中看到并接受收集器地址、精确字段、绝不发送的内容、180 天保留期和用途后才会开启。漏斗在同意后记录 install；真正使用 `/design` 时记录 activated / weekly_active；只有成功完成 `design_workspace apply` 后才记录 first_success。可用 `/design-telemetry off`、`DO_NOT_TRACK=1` 或 `PI_TELEMETRY_DISABLED=1` 立即关闭。`PI_TELEMETRY_DEBUG=1` 只打印准确 payload，不发送也不消耗遥测状态。包本身不收集提示词、设计内容、源文件、路径、仓库名、凭据、身份字段或 IP。收集器为 `https://telemetry-peach.vercel.app/api/events`；其托管平台可能在包控制范围之外保留短期技术请求日志。模型调用仍由用户现有 Pi provider 执行，并受其隐私和费用政策约束。勿分享授权链接或将工作区服务暴露到公网。详见 [SECURITY.md](SECURITY.md)。
 
 ## 卸载
 
