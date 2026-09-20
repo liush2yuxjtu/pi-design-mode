@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.4 — 2026-09-20
+
+- 接入共享 `@nyn5255/telemetry@^0.1.3`，统一 install → activated → first_success → D7 / weekly_active 漏斗。
+- 新增 `/design-telemetry status|on|off`：默认关闭；开启前必须在交互 UI 中确认 collector、字段清单、180 天保留期与绝不发送的内容。
+- `/design` 的真实使用才记录 activated / weekly_active；只有成功 `design_workspace apply` 才记录 first_success。
+- `DO_NOT_TRACK` / `PI_TELEMETRY_DISABLED` 始终优先关闭；`PI_TELEMETRY_DEBUG=1` 可只检查准确 payload 而不发送、不消耗状态。
+- 中英文 README 同步隐私边界与 0.3.4 安装命令。
+
 ## 0.3.1 — 2026-09-10
 
 - 双语 README 与官网直接内嵌中英文完整 GIF，无需跳转或点击播放。
