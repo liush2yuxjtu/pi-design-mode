@@ -1,8 +1,8 @@
 name: Package checks
+# Pre-PR checks moved to local /verify; manual fallback only.
 on:
-  pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
