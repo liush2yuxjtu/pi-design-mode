@@ -1,6 +1,6 @@
 {
   "name": "pi-design-mode",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Local UI design workspace for the Pi coding agent: edit design tokens and components, keep revisions, and export interactive HTML prototypes.",
   "keywords": [
     "pi-package",
